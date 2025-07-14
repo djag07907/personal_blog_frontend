@@ -24,13 +24,14 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@/app/*": ["app/*"],
-      "@/components/*": ["components/*"],
-      "@/flows/*": ["flows/*"],
-      "@/constants/*": ["constants/*"],
-      "@/assets/*": ["assets/*"],
-      "@/lib/*": ["lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/app/*": ["./src/app/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/lib/commons/*": ["./src/lib/commons/*"],
+      "@/lib/constants/*": ["./src/lib/constants/*"],
+      "@/lib/hooks/*": ["./src/lib/hooks/*"],
+      "@/lib/styles/*": ["./src/lib/styles/*"],
+      "@/lib/article/*": ["./src/lib/article/*"],
+      "@/lib/sharedComponents/*": ["./src/lib/sharedComponents/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
