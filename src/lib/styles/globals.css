@@ -1,11 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
@@ -31,7 +26,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Base setup for layout */
 html,
 body {
   min-height: 100%;
@@ -63,4 +57,26 @@ img {
 }
 img:hover {
   transform: scale(1.01);
+}
+
+.bg-noise-pattern {
+  /* background: #000000;
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      rgba(139, 92, 246, 0.2) 1px,
+      transparent 0
+    ),
+    radial-gradient(
+      circle at 1px 1px,
+      rgba(59, 130, 246, 0.18) 1px,
+      transparent 0
+    ),
+    radial-gradient(
+      circle at 1px 1px,
+      rgba(236, 72, 153, 0.15) 1px,
+      transparent 0
+    );
+  background-size: 20px 20px, 30px 30px, 25px 25px;
+  background-position: 0 0, 10px 10px, 15px 5px; */
+  background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%);
 }

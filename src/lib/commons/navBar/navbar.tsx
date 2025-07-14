@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
           max-[1024px]:text-left
         "
       >
-        lamablog
+        {/* lamablog */}
       </div>
 
       {/* Navigation Links */}
