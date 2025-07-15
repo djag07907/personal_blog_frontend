@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-// import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/lib/commons/navBar/navbar";
-
 import "@/lib/styles/globals.css";
+import Footer from "@/lib/commons/footer/footer";
+import { ThemeContextProvider } from "@/lib/commons/context/theme_context";
+import ThemeProvider from "@/lib/commons/theme/theme_provider";
 
 export const metadata: Metadata = {
   title: "My Tech Blog",
@@ -16,9 +17,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-noise-pattern">
-        <Navbar />
-        {children}
+      <body className="bg-circuit-pattern">
+        <ThemeContextProvider>
+          <ThemeProvider>
+            <div className="container">
+              <div className="wrapper">
+                <Navbar />
+                {children}
+                <Footer />
+              </div>
+            </div>
+          </ThemeProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   );

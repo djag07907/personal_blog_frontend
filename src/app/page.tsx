@@ -2,8 +2,10 @@
 
 import { Article } from "@/lib/article/model/article_data";
 import { mockArticles } from "@/lib/article/model/mock_articles";
-import HeroSection from "@/lib/commons/hero/hero_section";
-import ArticlesGrid from "@/lib/commons/lists/articles_grid";
+import CategoryList from "@/lib/categories/categories_list";
+import Featured from "@/lib/commons/featured/featured";
+import CardList from "@/lib/commons/lists/cards_list";
+import Menu from "@/lib/commons/menu/menu";
 import { emptyArray } from "@/lib/constants/constants";
 import { useEffect, useState } from "react";
 
@@ -23,17 +25,12 @@ export default function HomePage() {
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
-      <HeroSection
-        title="Welcome to My Blog"
-        subtitle="All things tech, dev, and beyond"
-      />
-      <ArticlesGrid
-        articles={articles.map((article) => ({
-          title: article.title,
-          description: article.description,
-          image: article.image.url,
-        }))}
-      />
+      <Featured />
+      <CategoryList />
+      <div>
+        <CardList page={1} mockData={articles} />
+        <Menu />
+      </div>
     </main>
   );
 }

@@ -60,7 +60,7 @@ img:hover {
 }
 
 .bg-noise-pattern {
-  /* background: #000000;
+  background: #000000;
   background-image: radial-gradient(
       circle at 1px 1px,
       rgba(139, 92, 246, 0.2) 1px,
@@ -77,6 +77,87 @@ img:hover {
       transparent 0
     );
   background-size: 20px 20px, 30px 30px, 25px 25px;
-  background-position: 0 0, 10px 10px, 15px 5px; */
+  background-position: 0 0, 10px 10px, 15px 5px;
+}
+
+.bg-radial-gradient {
   background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%);
+}
+
+.bg-circuit-pattern {
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    radial-gradient(
+      circle at 20px 20px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40px 40px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    );
+  background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;
+}
+
+.container {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.wrapper {
+  max-width: 1536px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+@media screen and (max-width: 1536px) {
+  .wrapper {
+    max-width: 1366px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  .wrapper {
+    max-width: 1024px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .wrapper {
+    max-width: 768px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    max-width: 640px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .wrapper {
+    max-width: 475px;
+  }
 }
