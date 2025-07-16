@@ -15,7 +15,7 @@ const Card = ({ item }: { item: CardItem }) => {
   return (
     <div className="mb-12 flex items-center gap-12" key={item.id}>
       {item.img && (
-        <div className="relative h-[350px] flex-1 hidden xl:block">
+        <div className="relative h-[350px] flex-1  xl:block">
           <Image
             src={item.img}
             alt={item.title}

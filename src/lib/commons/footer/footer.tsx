@@ -8,7 +8,7 @@ const Footer = () => {
       {/* Info Section */}
       <div className="flex-1 flex flex-col gap-3">
         <div className="flex items-center gap-2">
-          <Image src="/logo.png" alt="daniel blog" width={50} height={50} />
+          <Image src="/profile.png" alt="daniel blog" width={50} height={50} />
           <h1 className="text-2xl font-semibold">Daniel Alvarez</h1>
         </div>
         <p className="font-light max-w-md">

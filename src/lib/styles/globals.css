@@ -58,8 +58,7 @@ img {
 img:hover {
   transform: scale(1.01);
 }
-
-.bg-noise-pattern {
+/* .bg-noise-pattern {
   background: #000000;
   background-image: radial-gradient(
       circle at 1px 1px,
@@ -78,11 +77,11 @@ img:hover {
     );
   background-size: 20px 20px, 30px 30px, 25px 25px;
   background-position: 0 0, 10px 10px, 15px 5px;
-}
+} */
 
-.bg-radial-gradient {
+/* .bg-radial-gradient {
   background: radial-gradient(125% 125% at 50% 10%, #000000 40%, #0d1a36 100%);
-}
+} */
 
 .bg-circuit-pattern {
   background-image: repeating-linear-gradient(
@@ -130,8 +129,8 @@ img:hover {
   max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 @media screen and (max-width: 1536px) {

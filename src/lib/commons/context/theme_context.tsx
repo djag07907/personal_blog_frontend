@@ -29,6 +29,7 @@ export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
+    document.body.className = theme === "dark" ? "dark" : "";
     localStorage.setItem("theme", theme ?? "light");
   }, [theme]);
 

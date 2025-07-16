@@ -12,12 +12,12 @@ const categories = [
 
 const MenuCategories = () => {
   return (
-    <div className="mt-9 mb-15 flex flex-wrap gap-5">
+    <div className="mt-9 mb-[60px] flex flex-wrap gap-5">
       {categories.map(({ name, href, bgColor }) => (
         <Link
           key={name}
           href={href}
-          className={`px-6 py-2 rounded-lg text-sm ${bgColor}`}
+          className={`px-[25px] py-[10px] rounded-[10px] text-sm ${bgColor}`}
         >
           {name}
         </Link>
