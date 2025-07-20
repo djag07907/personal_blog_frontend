@@ -11,6 +11,7 @@ body {
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ffffff;
 }
 
 html,
@@ -111,17 +112,52 @@ img:hover {
   background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;
 }
 
-.container {
+.app-container {
   min-height: 100vh;
   width: 100%;
 }
 
-.container.dark {
+.app-container.dark {
   color: white;
+  background-color: #0f172a;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    radial-gradient(
+      circle at 20px 20px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40px 40px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    );
+  background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;
 }
 
-.container.light {
+.app-container.light {
   color: #1f2937;
+  background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #f8fafc 100%);
 }
 
 .wrapper {

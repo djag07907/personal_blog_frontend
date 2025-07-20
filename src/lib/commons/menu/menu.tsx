@@ -4,7 +4,7 @@ import MenuCategories from "./menu_categories";
 
 const Menu = () => {
   return (
-    <div className="p-6">
+    <div className="flex-1 p-6">
       {/* What's hot */}
       <h2 className="text-lg font-semibold text-gray-600 mb-1">
         {"What's hot"}

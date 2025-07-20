@@ -24,17 +24,14 @@ export default function RootLayout({
   );
 }
 const InnerLayout = ({ children }: { children: React.ReactNode }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, mounted } = useContext(ThemeContext);
+
+  const staticBodyClass = `${inter.className}`;
+
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.className} ${
-          theme === "dark"
-            ? "bg-circuit-pattern dark"
-            : "bg-radial-gradient light"
-        }`}
-      >
-        <div className={`container ${theme}`}>
+      <body className={staticBodyClass}>
+        <div className={`app-container ${!mounted ? "light" : theme}`}>
           <div className="wrapper">
             <Navbar />
             {children}
