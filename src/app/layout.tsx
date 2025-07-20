@@ -1,6 +1,5 @@
 "use client";
 
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/lib/commons/navBar/navbar";
 import "@/lib/styles/globals.css";
@@ -12,11 +11,6 @@ import {
 import { useContext } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-
-const metadata: Metadata = {
-  title: "My Tech Blog",
-  description: "A blog to share articles about tech, software, and more."
-};
 
 export default function RootLayout({
   children,
@@ -34,11 +28,13 @@ const InnerLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-circuit-pattern ${
-          theme === "dark" ? "dark" : "light"
+        className={`${inter.className} ${
+          theme === "dark"
+            ? "bg-circuit-pattern dark"
+            : "bg-radial-gradient light"
         }`}
       >
-        <div className="container">
+        <div className={`container ${theme}`}>
           <div className="wrapper">
             <Navbar />
             {children}

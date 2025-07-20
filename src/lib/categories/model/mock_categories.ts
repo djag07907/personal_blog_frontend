@@ -37,4 +37,16 @@ export const mockCategories: Category[] = [
     slug: "coding",
     img: "/instagram.png",
   },
+  {
+    id: "7",
+    title: "Coding",
+    slug: "coding",
+    img: "/instagram.png",
+  },
+  {
+    id: "8",
+    title: "Coding",
+    slug: "coding",
+    img: "/instagram.png",
+  },
 ];

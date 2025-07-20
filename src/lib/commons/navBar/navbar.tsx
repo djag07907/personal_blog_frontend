@@ -7,12 +7,12 @@ import ThemeToggle from "../theme/theme_toggle";
 
 const Navbar: React.FC = () => {
   return (
-    <div className="flex items-center justify-between h-24 px-4">
+    <div className="flex items-center justify-between h-20 px-4">
       {/* Social Icons */}
       <div className="flex gap-8 flex-1 max-[1024px]:hidden flex-nowrap">
-        <Image src="/instagram.png" alt="instagram" width={24} height={24} />
-        <Image src="/linkedin.png" alt="linkedin" width={24} height={24} />
-        <Image src="/profile.png" alt="portfolio" width={24} height={24} />
+        <Image src="/instagram.png" alt="instagram" width={35} height={35} />
+        <Image src="/linkedin.png" alt="linkedin" width={35} height={35} />
+        <Image src="/profile.png" alt="portfolio" width={35} height={35} />
       </div>
 
       {/* Logo */}

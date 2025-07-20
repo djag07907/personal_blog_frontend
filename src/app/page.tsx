@@ -27,7 +27,7 @@ export default function HomePage() {
     <main className="max-w-6xl mx-auto px-4 py-12">
       <Featured />
       <CategoryList />
-      <div className="flex gap-[50px]">
+      <div className="flex gap-12">
         <CardList page={1} mockData={articles} />
         <Menu />
       </div>

@@ -1,7 +1,6 @@
 "use client";
-
-import { createContext, useEffect, useState } from "react";
-
+import { createContext, useEffect, useState, ReactNode } from "react";
+// Define the shape of the context
 export const ThemeContext = createContext<{
   theme: string;
   toggle: () => void;
@@ -9,30 +8,26 @@ export const ThemeContext = createContext<{
   theme: "light",
   toggle: () => {},
 });
-
-const getFromLocalStorage = () => {
+// Function to get the theme from local storage
+const getFromLocalStorage = (): string => {
   if (typeof window !== "undefined") {
     const value = localStorage.getItem("theme");
     return value || "light";
   }
+  return "light";
 };
-
-import { ReactNode } from "react";
-
 export const ThemeContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<string>(() => {
-    return getFromLocalStorage() ?? "light";
+    return getFromLocalStorage();
   });
-
   const toggle = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
-
   useEffect(() => {
+    // Apply the theme class to the body
     document.body.className = theme === "dark" ? "dark" : "";
-    localStorage.setItem("theme", theme ?? "light");
+    localStorage.setItem("theme", theme);
   }, [theme]);
-
   return (
     <ThemeContext.Provider value={{ theme, toggle }}>
       {children}

@@ -4,7 +4,7 @@ import Image from "next/image";
 const Featured = () => {
   return (
     <div className="mt-8">
-      <h1 className="text-[36px] sm:text-[48px] md:text-[64px] lg:text-[72px] xl:text-[96px] font-light">
+      <h1 className="text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] xl:text-[70px] font-light">
         <b className="font-bold">Hey, Daniel here!</b> Discover my stories and
         creative ideas.
       </h1>
@@ -31,7 +31,7 @@ const Featured = () => {
             laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
             quisquam! Harum unde sit culpa debitis.
           </p>
-          <button className="px-5 py-4 rounded bg-gray-200 text-sm font-medium hover:opacity-90 transition">
+          <button className="px-5 py-4 rounded bg-blue-800 text-sm font-medium hover:opacity-90 transition">
             Read More
           </button>
         </div>
