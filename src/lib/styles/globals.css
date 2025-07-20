@@ -50,26 +50,6 @@ img {
 img:hover {
   transform: scale(1.01);
 }
-/* .bg-noise-pattern {
-  background: #000000;
-  background-image: radial-gradient(
-      circle at 1px 1px,
-      rgba(139, 92, 246, 0.2) 1px,
-      transparent 0
-    ),
-    radial-gradient(
-      circle at 1px 1px,
-      rgba(59, 130, 246, 0.18) 1px,
-      transparent 0
-    ),
-    radial-gradient(
-      circle at 1px 1px,
-      rgba(236, 72, 153, 0.15) 1px,
-      transparent 0
-    );
-  background-size: 20px 20px, 30px 30px, 25px 25px;
-  background-position: 0 0, 10px 10px, 15px 5px;
-} */
 
 .bg-radial-gradient {
   background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #f8fafc 100%);
@@ -157,7 +137,39 @@ img:hover {
 
 .app-container.light {
   color: #1f2937;
-  background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #f8fafc 100%);
+  background-color: #ffffff;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 19px,
+      rgba(75, 85, 99, 0.08) 19px,
+      rgba(75, 85, 99, 0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75, 85, 99, 0.08) 39px,
+      rgba(75, 85, 99, 0.08) 40px
+    ),
+    radial-gradient(
+      circle at 20px 20px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 40px 40px,
+      rgba(55, 65, 81, 0.12) 2px,
+      transparent 2px
+    );
 }
 
 .wrapper {
