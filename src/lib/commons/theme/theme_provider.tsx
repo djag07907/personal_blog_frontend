@@ -1,6 +1,6 @@
 "use client";
+import { ThemeContext } from "@/lib/commons/context/theme_context";
 import React, { useContext, ReactNode } from "react";
-import { ThemeContext } from "../context/theme_context";
 
 interface ThemeProviderProps {
   children: ReactNode;

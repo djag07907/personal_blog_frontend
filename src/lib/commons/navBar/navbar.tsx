@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import ThemeToggle from "../theme/theme_toggle";
+import ThemeToggle from "@/lib/commons/theme/theme_toggle";
 
 const Navbar: React.FC = () => {
   return (

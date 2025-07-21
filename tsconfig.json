@@ -31,7 +31,8 @@
       "@/lib/hooks/*": ["./src/lib/hooks/*"],
       "@/lib/styles/*": ["./src/lib/styles/*"],
       "@/lib/article/*": ["./src/lib/article/*"],
-      "@/lib/sharedComponents/*": ["./src/lib/sharedComponents/*"]
+      "@/lib/sharedComponents/*": ["./src/lib/sharedComponents/*"],
+      "@/lib/categories/*": ["./src/lib/categories/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,0 +1,13 @@
+{
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.suggest.autoImports": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "minimal",
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.suggest.includeCompletionsForModuleExports": true,
+  "typescript.preferences.useAliasesForRenames": true,
+  "typescript.suggest.paths": true,
+  "javascript.preferences.importModuleSpecifier": "non-relative",
+  "javascript.suggest.autoImports": true,
+  "javascript.suggest.paths": true
+}

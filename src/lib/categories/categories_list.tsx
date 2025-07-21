@@ -3,8 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Category } from "./model/categories_data";
-import { mockCategories } from "./model/mock_categories";
+import { COLORS } from "@/lib/constants/colors_constants";
+import { Category } from "@/lib/categories/model/categories_data";
+import { mockCategories } from "@/lib/categories/model/mock_categories";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -17,15 +18,7 @@ const CategoryList = () => {
   }, []);
 
   const getColorBySlug = (slug: string) => {
-    const colorMap: Record<string, string> = {
-      style: "bg-[#57c4ff31]",
-      fashion: "bg-[#da85c731]",
-      food: "bg-[#7fb88133]",
-      travel: "bg-[#ff795736]",
-      culture: "bg-[#ffb04f45]",
-      coding: "bg-[#5e4fff31]",
-    };
-    return colorMap[slug] || "bg-gray-100";
+    return COLORS[slug as keyof typeof COLORS] || COLORS.default;
   };
 
   return (

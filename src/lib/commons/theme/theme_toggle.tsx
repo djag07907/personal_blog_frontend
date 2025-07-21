@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useContext } from "react";
-import { ThemeContext } from "../context/theme_context";
+import { ThemeContext } from "@/lib/commons/context/theme_context";
 const ThemeToggle: React.FC = () => {
   const { toggle, theme } = useContext(ThemeContext);
   const isDark = theme === "dark";

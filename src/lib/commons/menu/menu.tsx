@@ -1,6 +1,6 @@
 import React from "react";
-import MenuPosts from "./menu_posts";
-import MenuCategories from "./menu_categories";
+import MenuPosts from "@/lib/commons/menu/menu_posts";
+import MenuCategories from "@/lib/commons/menu/menu_categories";
 
 const Menu = () => {
   return (

@@ -1,4 +1,4 @@
-import { Article } from "./article_data";
+import { Article } from "@/lib/article/model/article_data";
 
 export const mockArticles: Article[] = [
   {

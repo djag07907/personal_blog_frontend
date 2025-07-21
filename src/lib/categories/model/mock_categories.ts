@@ -1,4 +1,4 @@
-import { Category } from "./categories_data";
+import { Category } from "@/lib/categories/model/categories_data";
 
 export const mockCategories: Category[] = [
   {

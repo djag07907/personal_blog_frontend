@@ -1,4 +1,5 @@
-import { Article } from "../model/article_data";
+import { Article } from "@/lib/article/model/article_data";
+import { emptyString } from "@/lib/constants/constants";
 
 export async function getArticles(): Promise<Article[]> {
   const res = await fetch(`${baseUrl}/api/articles?populate=image`, {
@@ -30,9 +31,9 @@ function formatArticle(item: any): Article {
     content: item.attributes.content,
     slug: item.attributes.slug,
     publishedAt: item.attributes.publishedAt,
-    category: item.attributes.category || "",
+    category: item.attributes.category || emptyString,
     image: {
-      url: item.attributes.image?.data?.attributes?.url || "",
+      url: item.attributes.image?.data?.attributes?.url || emptyString,
     },
   };
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import Pagination from "../pagination/pagination";
-import Card from "../cards/card";
 import { Article } from "@/lib/article/model/article_data";
 import { emptyString } from "@/lib/constants/constants";
+import Card from "@/lib/commons/cards/card";
+import Pagination from "@/lib/commons/pagination/pagination";
 
 interface CardItem {
   id: string;
