@@ -1,29 +1,66 @@
-import { getArticleBySlug } from "@/lib/article/service/article_service";
-import { notFound } from "next/navigation";
-// import { useContentProtection } from "@/lib/commons/utils/no_copy";
-import SEO from "@/lib/sharedComponents/seo";
-
-export default async function ArticlePage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const article = await getArticleBySlug(params.slug);
-  if (!article) return notFound();
-
-  return (
-    <article className="max-w-3xl mx-auto px-4 py-10">
-      <SEO title={article.title} description={article.description} />
-      <h1 className="text-4xl font-bold mb-6">{article.title}</h1>
-      <img
-        src={article.image.url}
-        alt={article.title}
-        className="w-full mb-8 rounded"
-      />
-      <div
-        className="prose prose-lg dark:prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: article.content }}
-      />
-    </article>
-  );
+import { mockArticles } from "@/lib/article/model/mock_articles";
+import Menu from "@/lib/commons/menu/menu";
+import Image from "next/image";
+interface SinglePageProps {
+  params: {
+    slug: string;
+  };
 }
+const SinglePage = ({ params }: SinglePageProps) => {
+  const { slug } = params;
+  // Find the article based on the slug
+  const data = mockArticles.find((article) => article.slug === slug) || {
+    title: "Article Not Found",
+    description: "No description available.",
+    content: "<p>No content available.</p>",
+    image: { url: "" },
+    publishedAt: "",
+    category: "General",
+  };
+  return (
+    <div className="container mx-auto p-4">
+      <div className="flex gap-12 items-center">
+        <div className="flex-1">
+          <h1 className="text-5xl font-bold mb-12">{data.title}</h1>
+          <div className="flex items-center gap-5 mb-6">
+            {data.image.url && (
+              <div className="w-12 h-12 relative">
+                <Image
+                  src={data.image.url}
+                  alt="User Avatar"
+                  layout="fill"
+                  className="rounded-full object-cover"
+                />
+              </div>
+            )}
+            <div className="flex flex-col">
+              <span className="text-lg font-medium">Author Name</span>
+              <span className="text-gray-500">01.01.2024</span>
+            </div>
+          </div>
+        </div>
+        {data.image.url && (
+          <div className="flex-1 h-80 relative">
+            <Image
+              src={data.image.url}
+              alt="Article Image"
+              layout="fill"
+              className="object-cover"
+            />
+          </div>
+        )}
+      </div>
+      <div className="mt-10">
+        <div
+          className="prose"
+          dangerouslySetInnerHTML={{ __html: data.content }}
+        />
+        {/* <div className="mt-10">
+          <Comments postSlug={slug} />
+        </div> */}
+      </div>
+      <Menu />
+    </div>
+  );
+};
+export default SinglePage;

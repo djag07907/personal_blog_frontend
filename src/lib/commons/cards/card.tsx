@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { routes } from "@/lib/routes/routes";
 interface CardItem {
   id: string;
   title: string;
@@ -37,7 +38,7 @@ const Card = ({ item }: { item: CardItem }) => {
           dangerouslySetInnerHTML={{ __html: item.desc.substring(0, 60) }}
         />
         <Link
-          href={`/posts/${item.slug}`}
+          href={routes.post(item.slug)}
           className="border-b border-crimson w-max py-0.5 text-crimson"
         >
           Read More
