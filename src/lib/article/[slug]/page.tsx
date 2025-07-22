@@ -2,13 +2,12 @@ import { mockArticles } from "@/lib/article/model/mock_articles";
 import Menu from "@/lib/commons/menu/menu";
 import Image from "next/image";
 interface SinglePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
-const SinglePage = ({ params }: SinglePageProps) => {
-  const { slug } = params;
-  // Find the article based on the slug
+const SinglePage = async ({ params }: SinglePageProps) => {
+  const { slug } = await params;
   const data = mockArticles.find((article) => article.slug === slug) || {
     title: "Article Not Found",
     description: "No description available.",
@@ -28,7 +27,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
                 <Image
                   src={data.image.url}
                   alt="User Avatar"
-                  layout="fill"
+                  fill
                   className="rounded-full object-cover"
                 />
               </div>
@@ -44,7 +43,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
             <Image
               src={data.image.url}
               alt="Article Image"
-              layout="fill"
+              fill
               className="object-cover"
             />
           </div>
