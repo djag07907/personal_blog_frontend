@@ -19,11 +19,12 @@ interface CardItem {
 interface CardListProps {
   page: number;
   mockData: Article[];
+  setPage: (page: number) => void;
 }
 
 const POST_PER_PAGE = 4;
 
-const CardList = ({ page, mockData }: CardListProps) => {
+const CardList = ({ page, mockData, setPage }: CardListProps) => {
   const transformedPosts: CardItem[] = mockData.map((item, idx) => ({
     id: String(item.id ?? idx),
     title: item.title,
@@ -46,13 +47,13 @@ const CardList = ({ page, mockData }: CardListProps) => {
   return (
     <div className="flex-2 pt-10">
       <h1 className="text-3xl font-bold mb-12">Recent Posts</h1>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 transition-opacity duration-300 ease-in-out">
         {paginatedPosts.map((item) => (
           <Card key={item.id} item={item} />
         ))}
       </div>
       <div className="mt-12">
-        <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} />
+        <Pagination page={page} hasPrev={hasPrev} hasNext={hasNext} setPage={setPage} />
       </div>
     </div>
   );

@@ -1,19 +1,19 @@
 "use client";
 
 import React from "react";
-import { useRouter } from "next/navigation";
 
 interface PaginationProps {
   page: number;
   hasPrev: boolean;
   hasNext: boolean;
+  setPage: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ page, hasPrev, hasNext }) => {
-  const router = useRouter();
-
+const Pagination: React.FC<PaginationProps> = ({ page, hasPrev, hasNext, setPage }) => {
   const handleNavigate = (newPage: number) => {
-    router.push(`?page=${newPage}`);
+    if (newPage > 0) {
+      setPage(newPage);
+    }
   };
 
   return (

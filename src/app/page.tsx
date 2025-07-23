@@ -8,12 +8,10 @@ import CardList from "@/lib/commons/lists/cards_list";
 import Menu from "@/lib/commons/menu/menu";
 import { emptyArray } from "@/lib/constants/constants";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 
 export default function HomePage() {
   const [articles, setArticles] = useState<Article[]>(emptyArray);
-  const searchParams = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
+  const [page, setPage] = useState(1);
 
   // useEffect(() => {
   //   getArticles().then(setArticles);
@@ -31,7 +29,7 @@ export default function HomePage() {
       <Featured />
       <CategoryList />
       <div className="flex gap-12">
-        <CardList page={page} mockData={articles} />
+        <CardList page={page} mockData={articles} setPage={setPage} />
         <Menu />
       </div>
     </main>
