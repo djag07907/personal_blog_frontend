@@ -21,7 +21,7 @@ interface CardListProps {
   mockData: Article[];
 }
 
-const POST_PER_PAGE = 2;
+const POST_PER_PAGE = 4;
 
 const CardList = ({ page, mockData }: CardListProps) => {
   const transformedPosts: CardItem[] = mockData.map((item, idx) => ({

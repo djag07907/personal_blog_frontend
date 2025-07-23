@@ -68,4 +68,72 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
   },
+  {
+    id: 5,
+    title: "Building RESTful APIs with Node.js",
+    description:
+      "Learn how to create robust REST APIs using Node.js and Express.",
+    content: `<p>Building APIs is a crucial skill for full-stack developers. In this guide, we'll explore best practices for creating RESTful APIs with Node.js, Express, and MongoDB.</p>`,
+    slug: "building-restful-apis-nodejs",
+    image: {
+      url: "/instagram.png",
+    },
+    publishedAt: "2024-07-15T16:20:00.000Z",
+    category: "Backend",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
+  },
+  {
+    id: 6,
+    title: "CSS Grid vs Flexbox: When to Use What",
+    description:
+      "A comprehensive comparison of CSS Grid and Flexbox layouts.",
+    content: `<p>CSS Grid and Flexbox are powerful layout systems. Understanding when to use each one will make you a more effective frontend developer.</p>`,
+    slug: "css-grid-vs-flexbox",
+    image: {
+      url: "/instagram.png",
+    },
+    publishedAt: "2024-07-20T11:30:00.000Z",
+    category: "CSS",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
+  },
+  {
+    id: 7,
+    title: "Introduction to GraphQL",
+    description:
+      "Get started with GraphQL and learn why it's gaining popularity.",
+    content: `<p>GraphQL is a query language that offers more flexibility than traditional REST APIs. Let's explore its benefits and how to implement it.</p>`,
+    slug: "introduction-to-graphql",
+    image: {
+      url: "/instagram.png",
+    },
+    publishedAt: "2024-07-22T09:15:00.000Z",
+    category: "Backend",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
+  },
+  {
+    id: 8,
+    title: "React Performance Optimization Tips",
+    description:
+      "Essential techniques to make your React apps faster and more efficient.",
+    content: `<p>Performance is crucial for user experience. Learn about React.memo, useMemo, useCallback, and other optimization techniques.</p>`,
+    slug: "react-performance-optimization",
+    image: {
+      url: "/instagram.png",
+    },
+    publishedAt: "2024-07-23T14:45:00.000Z",
+    category: "Frontend",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
+  },
 ];
