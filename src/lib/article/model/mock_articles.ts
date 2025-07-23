@@ -6,13 +6,17 @@ export const mockArticles: Article[] = [
     title: "Introduction to React and TypeScript",
     description:
       "Learn the basics of building typed React apps using TypeScript.",
-    content: `<p>React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.</p>`,
+    content: `<p>React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.React and TypeScript are a powerful duo. In this guide, we will explore how to set up a React project with TypeScript, and understand the key concepts of typed components.</p>`,
     slug: "introduction-to-react-and-typescript",
     image: {
       url: "/instagram.png",
     },
     publishedAt: "2024-06-20T10:00:00.000Z",
     category: "Frontend",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
   },
   {
     id: 2,
@@ -26,6 +30,10 @@ export const mockArticles: Article[] = [
     },
     publishedAt: "2024-06-25T14:30:00.000Z",
     category: "CMS",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
   },
   {
     id: 3,
@@ -38,6 +46,10 @@ export const mockArticles: Article[] = [
     },
     publishedAt: "2024-07-01T08:45:00.000Z",
     category: "UI/UX",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
   },
   {
     id: 4,
@@ -51,5 +63,9 @@ export const mockArticles: Article[] = [
     },
     publishedAt: "2024-07-10T12:00:00.000Z",
     category: "Management",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
   },
 ];

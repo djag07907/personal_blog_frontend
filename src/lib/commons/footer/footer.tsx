@@ -21,7 +21,6 @@ const Footer = () => {
           <Image src="/linkedin.png" alt="Facebook" width={18} height={18} />
           <Image src="/instagram.png" alt="Instagram" width={18} height={18} />
           <Image src="/profile.png" alt="Tiktok" width={18} height={18} />
-          {/* <Image src="/youtube.png" alt="YouTube" width={18} height={18} /> */}
         </div>
       </div>
 
@@ -29,8 +28,7 @@ const Footer = () => {
       <div className="flex-1 flex justify-end gap-24 flex-wrap md:flex-nowrap">
         <div className="flex flex-col gap-2 font-light min-w-[100px]">
           <span className="font-bold">Links</span>
-          <Link href="/">Homepage</Link>
-          <Link href="/">Blog</Link>
+          <Link href="/">Home</Link>
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>
         </div>
@@ -43,10 +41,8 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-2 font-light min-w-[100px]">
           <span className="font-bold">Social</span>
-          <Link href="/">Facebook</Link>
           <Link href="/">Instagram</Link>
-          <Link href="/">Tiktok</Link>
-          <Link href="/">Youtube</Link>
+          <Link href="/">LinkedIn</Link>
         </div>
       </div>
     </footer>

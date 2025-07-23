@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
         <ThemeToggle />
         <Link href="/" className="max-[640px]:hidden px-4">
           {" "}
-          Homepage
+          Home
         </Link>
         <Link href="/contact" className="max-[640px]:hidden px-4">
           {" "}

@@ -10,6 +10,8 @@ const SinglePage = async ({ params }: SinglePageProps) => {
   const { slug } = await params;
   const data = mockArticles.find((article) => article.slug === slug) || {
     title: "Article Not Found",
+    author: "Unknown",
+    authorImage: { url: "" },
     description: "No description available.",
     content: "<p>No content available.</p>",
     image: { url: "" },
@@ -33,8 +35,8 @@ const SinglePage = async ({ params }: SinglePageProps) => {
               </div>
             )}
             <div className="flex flex-col">
-              <span className="text-lg font-medium">Author Name</span>
-              <span className="text-gray-500">01.01.2024</span>
+              <span className="text-lg font-medium">{data.author}</span>
+              <span className="text-gray-500">{data.publishedAt}</span>
             </div>
           </div>
         </div>
@@ -49,16 +51,25 @@ const SinglePage = async ({ params }: SinglePageProps) => {
           </div>
         )}
       </div>
-      <div className="mt-10">
-        <div
-          className="prose"
-          dangerouslySetInnerHTML={{ __html: data.content }}
-        />
-        {/* <div className="mt-10">
-          <Comments postSlug={slug} />
-        </div> */}
+      <div className="flex gap-12 mt-10">
+        {/* Main content area */}
+        <div className="flex-[2]">
+          <div
+            className="prose max-w-none"
+            dangerouslySetInnerHTML={{ __html: data.content }}
+          />
+          {/* Placeholder space for future comments section */}
+          <div className="mt-10 min-h-[200px]">
+            {/* <Comments postSlug={slug} /> */}
+            {/* This space is reserved for the comments component */}
+          </div>
+        </div>
+
+        {/* Sidebar with Menu */}
+        <div className="flex-1">
+          <Menu />
+        </div>
       </div>
-      <Menu />
     </div>
   );
 };

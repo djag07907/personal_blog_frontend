@@ -1,5 +1,7 @@
 export interface Article {
   id: number;
+  author: string;
+  authorImage: { url: string };
   title: string;
   description: string;
   content: string;
