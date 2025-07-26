@@ -1,39 +1,65 @@
 import { Article } from "@/lib/article/model/article_data";
-import { emptyString } from "@/lib/constants/constants";
+import { ArticleRepository } from "@/lib/article/repository/article_repository.interface";
+import { StrapiArticleRepository } from "@/lib/article/repository/article_repository";
 
-export async function getArticles(): Promise<Article[]> {
-  const res = await fetch(`${baseUrl}/api/articles?populate=image`, {
-    cache: "no-store",
-  });
-  if (!res.ok) return [];
-  const json = await res.json();
-  return json.data.map((item: any) => formatArticle(item));
-}
+export class ArticleService {
+  private repository: ArticleRepository;
 
-export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const res = await fetch(
-    `${baseUrl}/api/articles?filters[slug][$eq]=${slug}&populate=image`,
-    {
-      cache: "no-store",
+  constructor(repository?: ArticleRepository) {
+    this.repository = repository ?? new StrapiArticleRepository();
+  }
+
+  async getAllArticles(): Promise<Article[]> {
+    try {
+      const articles = await this.repository.getAll();
+      console.log("Fetched articles from service:", articles); // Debug log
+      return articles;
+    } catch (error) {
+      console.error("ArticleService: Error fetching all articles:", error);
+      return [];
     }
-  );
-  if (!res.ok) return null;
-  const json = await res.json();
-  const article = json.data[0];
-  return article ? formatArticle(article) : null;
+  }
+
+  async getArticleBySlug(slug: string): Promise<Article | null> {
+    try {
+      return await this.repository.getBySlug(slug);
+    } catch (error) {
+      console.error("ArticleService: Error fetching article by slug:", error);
+      return null;
+    }
+  }
+
+  async getArticlesByCategory(category: string): Promise<Article[]> {
+    try {
+      return await this.repository.getByCategory(category);
+    } catch (error) {
+      console.error(
+        "ArticleService: Error fetching articles by category:",
+        error
+      );
+      return [];
+    }
+  }
+
+  async getPaginatedArticles(
+    page: number,
+    limit: number
+  ): Promise<{ articles: Article[]; total: number }> {
+    try {
+      return await this.repository.getPaginated(page, limit);
+    } catch (error) {
+      console.error(
+        "ArticleService: Error fetching paginated articles:",
+        error
+      );
+      return { articles: [], total: 0 };
+    }
+  }
 }
 
-function formatArticle(item: any): Article {
-  return {
-    id: item.id,
-    title: item.attributes.title,
-    description: item.attributes.description,
-    content: item.attributes.content,
-    slug: item.attributes.slug,
-    publishedAt: item.attributes.publishedAt,
-    category: item.attributes.category || emptyString,
-    image: {
-      url: item.attributes.image?.data?.attributes?.url || emptyString,
-    },
-  };
-}
+// Create a default instance for backward compatibility
+const defaultArticleService = new ArticleService();
+
+export const getArticles = () => defaultArticleService.getAllArticles();
+export const getArticleBySlug = (slug: string) =>
+  defaultArticleService.getArticleBySlug(slug);

@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { routes } from "@/lib/routes/routes";
+import { useState } from "react";
+
 interface CardItem {
   id: string;
   title: string;
@@ -10,19 +14,44 @@ interface CardItem {
   catSlug: string;
   img?: string;
 }
+
 const Card = ({ item }: { item: CardItem }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
   return (
     <div className="mb-12 flex items-center gap-12" key={item.id}>
-      {item.img && (
+      {item.img && !imageError && (
         <div className="relative h-[350px] flex-1 hidden xl:block">
-          {" "}
-          {/* Hide on smaller screens */}
+          {imageLoading && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
+          )}
           <Image
             src={item.img}
             alt={item.title}
             fill
-            className="object-cover"
+            className="object-cover rounded"
+            onError={handleImageError}
+            onLoad={handleImageLoad}
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bvND6v8A/9k="
           />
+        </div>
+      )}
+      {item.img && imageError && (
+        <div className="relative h-[350px] flex-1 hidden xl:block">
+          <div className="flex items-center justify-center h-full bg-gray-100 rounded">
+            <span className="text-gray-400 text-sm">Image not available</span>
+          </div>
         </div>
       )}
       <div className="flex-1 flex flex-col gap-8">

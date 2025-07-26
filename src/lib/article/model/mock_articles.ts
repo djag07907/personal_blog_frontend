@@ -88,8 +88,7 @@ export const mockArticles: Article[] = [
   {
     id: 6,
     title: "CSS Grid vs Flexbox: When to Use What",
-    description:
-      "A comprehensive comparison of CSS Grid and Flexbox layouts.",
+    description: "A comprehensive comparison of CSS Grid and Flexbox layouts.",
     content: `<p>CSS Grid and Flexbox are powerful layout systems. Understanding when to use each one will make you a more effective frontend developer.</p>`,
     slug: "css-grid-vs-flexbox",
     image: {
@@ -130,6 +129,22 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     publishedAt: "2024-07-23T14:45:00.000Z",
+    category: "Frontend",
+    author: "Daniel Alvarez",
+    authorImage: {
+      url: "/instagram.png",
+    },
+  },
+  {
+    id: 9,
+    title: "Flutter for Web Developers",
+    description: "A guide for web developers to get started with Flutter.",
+    content: `<p>Flutter is gaining more and more popularity in web development.</p>`,
+    slug: "react-performance-optimization",
+    image: {
+      url: "/instagram.png",
+    },
+    publishedAt: "2024-07-30T14:45:00.000Z",
     category: "Frontend",
     author: "Daniel Alvarez",
     authorImage: {
