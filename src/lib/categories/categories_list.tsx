@@ -5,16 +5,24 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { COLORS } from "@/lib/constants/colors_constants";
 import { Category } from "@/lib/categories/model/categories_data";
-import { mockCategories } from "@/lib/categories/model/mock_categories";
+import { getCategories } from "@/lib/categories/service/category_service";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
-    // Simulate async fetch from mock data
-    setTimeout(() => {
-      setCategories(mockCategories);
-    }, 100);
+    const fetchCategories = async () => {
+      try {
+        const fetchedCategories = await getCategories();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+        // You could fallback to mock data here if needed
+        // setCategories(mockCategories);
+      }
+    };
+    
+    fetchCategories();
   }, []);
 
   const getColorBySlug = (slug: string) => {
@@ -34,16 +42,16 @@ const CategoryList = () => {
             )} 
               xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full`}
           >
-            {item.img && (
+            {(item.img || item.image?.url) && (
               <Image
-                src={item.img}
-                alt={item.title}
+                src={item.img || item.image?.url || ''}
+                alt={item.title || item.name}
                 width={32}
                 height={32}
                 className="rounded-full"
               />
             )}
-            {item.title}
+            {item.title || item.name}
           </Link>
         ))}
       </div>

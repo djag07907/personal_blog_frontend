@@ -3,27 +3,40 @@ import { ArticleRepository } from "@/lib/article/repository/article_repository.i
 import { baseUrl } from "@/lib/constants/api_constants";
 import { emptyString } from "@/lib/constants/constants";
 
+interface StrapiMediaObject {
+  id: number;
+  name: string;
+  url: string;
+  alternativeText?: string;
+  width?: number;
+  height?: number;
+}
+
 interface StrapiApiResponse {
   data: Array<{
     id: number;
+    documentId?: string;
     title: string;
     description: string;
     content: string;
     slug: string;
     publishedAt: string;
-    category?: string;
-    author?: string;
-    authorImage?: {
-      url: string;
-    };
-    image?: {
+    category?: {
       id: number;
+      documentId?: string;
       name: string;
-      url: string;
-      alternativeText?: string;
-      width?: number;
-      height?: number;
+      slug: string;
+      description?: string;
+      color?: string;
     };
+    author?: {
+      id: number;
+      documentId?: string;
+      name: string;
+      email?: string;
+      avatar?: StrapiMediaObject;
+    };
+    image?: StrapiMediaObject;
   }>;
   meta?: {
     pagination?: {
@@ -44,7 +57,7 @@ export class StrapiArticleRepository implements ArticleRepository {
 
   async getAll(): Promise<Article[]> {
     try {
-      const response = await fetch(`${this.apiUrl}?populate=image`, {
+      const response = await fetch(`${this.apiUrl}?populate=*`, {
         cache: "no-store",
       });
 
@@ -63,7 +76,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getBySlug(slug: string): Promise<Article | null> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?filters[slug][$eq]=${slug}&populate=image`,
+        `${this.apiUrl}?filters[slug][$eq]=${slug}&populate=*`,
         {
           cache: "no-store",
         }
@@ -85,7 +98,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getByCategory(category: string): Promise<Article[]> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?filters[category][$eq]=${category}&populate=image`,
+        `${this.apiUrl}?filters[category][name][$eq]=${category}&populate=*`,
         {
           cache: "no-store",
         }
@@ -109,7 +122,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   ): Promise<{ articles: Article[]; total: number }> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?populate=image&pagination[page]=${page}&pagination[pageSize]=${limit}`,
+        `${this.apiUrl}?populate=*&pagination[page]=${page}&pagination[pageSize]=${limit}`,
         {
           cache: "no-store",
         }
@@ -138,10 +151,12 @@ export class StrapiArticleRepository implements ArticleRepository {
       content: item.content ?? emptyString,
       slug: item.slug ?? emptyString,
       publishedAt: item.publishedAt ?? new Date().toISOString(),
-      category: item.category ?? emptyString,
-      author: item.author ?? emptyString,
+      category: item.category?.name ?? emptyString,
+      author: item.author?.name ?? emptyString,
       authorImage: {
-        url: item.authorImage?.url ?? emptyString,
+        url: item.author?.avatar?.url
+          ? `${baseUrl.replace(/\/$/, "")}${item.author.avatar.url}`
+          : emptyString,
       },
       image: {
         url: item.image?.url
