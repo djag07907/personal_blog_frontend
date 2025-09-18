@@ -31,7 +31,7 @@ export default function HomePage() {
         try {
           const fetchedArticles = await getArticles();
           setArticles(fetchedArticles);
-          console.log('Fetched articles:', fetchedArticles); // Debug log
+          console.log("Fetched articles:", fetchedArticles);
         } catch (error) {
           console.error("Failed to fetch articles:", error);
           setError("Failed to load articles. Please try again.");
@@ -59,8 +59,8 @@ export default function HomePage() {
           <div className="flex-2 pt-10">
             <div className="text-center py-8">
               <p className="text-red-600">{error}</p>
-              <button 
-                onClick={() => setUseMockData(false)} 
+              <button
+                onClick={() => setUseMockData(false)}
                 className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
               >
                 Retry
@@ -72,11 +72,11 @@ export default function HomePage() {
         )}
         <Menu />
       </div>
-      <button 
+      <button
         onClick={() => setUseMockData((prev) => !prev)}
         className="mt-8 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
       >
-        {useMockData ? 'Use Real Data' : 'Use Mock Data'}
+        {useMockData ? "Use Real Data" : "Use Mock Data"}
       </button>
     </main>
   );

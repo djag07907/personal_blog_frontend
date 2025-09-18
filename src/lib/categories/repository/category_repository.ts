@@ -79,7 +79,9 @@ export class StrapiCategoryRepository implements CategoryRepository {
     }
   }
 
-  private mapToCategory(item: StrapiCategoryApiResponse["data"][number]): Category {
+  private mapToCategory(
+    item: StrapiCategoryApiResponse["data"][number]
+  ): Category {
     return {
       id: item.id,
       name: item.name ?? emptyString,
@@ -91,7 +93,6 @@ export class StrapiCategoryRepository implements CategoryRepository {
           ? `${baseUrl.replace(/\/$/, "")}${item.image.url}`
           : emptyString,
       },
-      // Backward compatibility
       title: item.name ?? emptyString,
       img: item.image?.url
         ? `${baseUrl.replace(/\/$/, "")}${item.image.url}`

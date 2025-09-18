@@ -12,7 +12,7 @@ export default function SEO({
   title,
   description = "A personal blog about tech, development, and software.",
   image = "/favicon.ico",
-  url = "https://yourdomain.com",
+  url = "https://www.danielalvarez-dev.com",
 }: SEOProps) {
   const fullTitle = `${title} | My Tech Blog`;
 

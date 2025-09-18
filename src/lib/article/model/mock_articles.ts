@@ -140,7 +140,7 @@ export const mockArticles: Article[] = [
     title: "Flutter for Web Developers",
     description: "A guide for web developers to get started with Flutter.",
     content: `<p>Flutter is gaining more and more popularity in web development.</p>`,
-    slug: "react-performance-optimization",
+    slug: "flutter-for-web-developers",
     image: {
       url: "/instagram.png",
     },

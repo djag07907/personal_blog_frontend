@@ -7,7 +7,6 @@ export interface Category {
     url: string;
   };
   color?: string;
-  // Keep these for backward compatibility
   title?: string;
   img?: string;
 }

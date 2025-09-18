@@ -12,7 +12,7 @@ export class CategoryService {
   async getAllCategories(): Promise<Category[]> {
     try {
       const categories = await this.repository.getAll();
-      console.log("Fetched categories from service:", categories); // Debug log
+      console.log("Fetched categories from service:", categories);
       return categories;
     } catch (error) {
       console.error("CategoryService: Error fetching all categories:", error);
@@ -30,7 +30,6 @@ export class CategoryService {
   }
 }
 
-// Create a default instance for backward compatibility
 const defaultCategoryService = new CategoryService();
 
 export const getCategories = () => defaultCategoryService.getAllCategories();

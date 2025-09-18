@@ -57,7 +57,7 @@ export class StrapiArticleRepository implements ArticleRepository {
 
   async getAll(): Promise<Article[]> {
     try {
-      const response = await fetch(`${this.apiUrl}?populate=*`, {
+      const response = await fetch(`${this.apiUrl}?populate=author.avatar&populate=image&populate=category`, {
         cache: "no-store",
       });
 
@@ -76,7 +76,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getBySlug(slug: string): Promise<Article | null> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?filters[slug][$eq]=${slug}&populate=*`,
+        `${this.apiUrl}?filters[slug][$eq]=${slug}&populate=author.avatar&populate=image&populate=category`,
         {
           cache: "no-store",
         }
@@ -98,7 +98,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getByCategory(category: string): Promise<Article[]> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?filters[category][name][$eq]=${category}&populate=*`,
+        `${this.apiUrl}?filters[category][name][$eq]=${category}&populate=author.avatar&populate=image&populate=category`,
         {
           cache: "no-store",
         }
@@ -122,7 +122,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   ): Promise<{ articles: Article[]; total: number }> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?populate=*&pagination[page]=${page}&pagination[pageSize]=${limit}`,
+        `${this.apiUrl}?populate=author.avatar&populate=image&populate=category&pagination[page]=${page}&pagination[pageSize]=${limit}`,
         {
           cache: "no-store",
         }

@@ -12,7 +12,7 @@ export class ArticleService {
   async getAllArticles(): Promise<Article[]> {
     try {
       const articles = await this.repository.getAll();
-      console.log("Fetched articles from service:", articles); // Debug log
+      console.log("Fetched articles from service:", articles);
       return articles;
     } catch (error) {
       console.error("ArticleService: Error fetching all articles:", error);
@@ -57,7 +57,6 @@ export class ArticleService {
   }
 }
 
-// Create a default instance for backward compatibility
 const defaultArticleService = new ArticleService();
 
 export const getArticles = () => defaultArticleService.getAllArticles();
