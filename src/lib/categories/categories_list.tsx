@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { COLORS } from "@/lib/constants/colors_constants";
 import { Category } from "@/lib/categories/model/categories_data";
 import { getCategories } from "@/lib/categories/service/category_service";
 
@@ -25,10 +24,6 @@ const CategoryList = () => {
     fetchCategories();
   }, []);
 
-  const getColorBySlug = (slug: string) => {
-    return COLORS[slug as keyof typeof COLORS] || COLORS.default;
-  };
-
   return (
     <div className="my-12">
       <h1 className="text-xl font-semibold mb-12">Popular Categories</h1>
@@ -37,10 +32,10 @@ const CategoryList = () => {
           <Link
             href={`/blog?cat=${item.slug}`}
             key={item.id}
-            className={`capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] ${getColorBySlug(
-              item.slug
-            )} 
-              xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full`}
+            className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full"
+            style={{
+              backgroundColor: item.color ? `${item.color}33` : '#f3f4f6', // Add 33 for 20% opacity
+            }}
           >
             {(item.img || item.image?.url) && (
               <Image
