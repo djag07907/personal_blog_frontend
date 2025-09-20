@@ -44,7 +44,7 @@ export default function HomePage() {
   }, [useMockData]);
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-12">
+    <main className="max-w-6xl mx-auto px-4 py-12 pt-20">
       <Featured />
       <CategoryList />
       <div className="flex gap-12">

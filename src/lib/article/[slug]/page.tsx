@@ -55,7 +55,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
   }, [params]);
   if (loading) {
     return (
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 pt-28">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
           <span className="ml-3 text-gray-600">Loading article...</span>
@@ -66,7 +66,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
 
   if (error) {
     return (
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 pt-28">
         <div className="text-center py-8">
           <p className="text-red-600 text-xl">{error}</p>
         </div>
@@ -76,7 +76,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
 
   if (!article) {
     return (
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 pt-28">
         <div className="text-center py-8">
           <p className="text-gray-600 text-xl">Article not found</p>
         </div>
@@ -85,7 +85,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 pt-28">
       <div className="flex gap-12 items-center">
         <div className="flex-1">
           <h1 className="text-5xl font-bold mb-12">{article.title}</h1>
