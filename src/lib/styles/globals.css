@@ -29,6 +29,38 @@ main {
   padding-bottom: 4rem;
 }
 
+/* Glassmorphism enhancements */
+@supports (backdrop-filter: blur(20px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+/* Ensure navbar is always on top */
+nav {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+}
+
+/* Smooth navbar transitions */
+nav * {
+  transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Enhanced gradient text effect */
+.bg-clip-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 h1,
 h2,
 h3 {
