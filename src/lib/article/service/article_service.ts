@@ -55,6 +55,17 @@ export class ArticleService {
       return { articles: [], total: 0 };
     }
   }
+
+  async getEditorsPickArticles(): Promise<Article[]> {
+    try {
+      const articles = await this.repository.getEditorsPick();
+      console.log("Fetched editor's pick articles from service:", articles);
+      return articles;
+    } catch (error) {
+      console.error("ArticleService: Error fetching editor's pick articles:", error);
+      return [];
+    }
+  }
 }
 
 const defaultArticleService = new ArticleService();
@@ -62,3 +73,5 @@ const defaultArticleService = new ArticleService();
 export const getArticles = () => defaultArticleService.getAllArticles();
 export const getArticleBySlug = (slug: string) =>
   defaultArticleService.getArticleBySlug(slug);
+export const getEditorsPickArticles = () => 
+  defaultArticleService.getEditorsPickArticles();

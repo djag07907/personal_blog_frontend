@@ -1,6 +1,7 @@
 import React from "react";
 import MenuPosts from "@/lib/commons/menu/menu_posts";
 import MenuCategories from "@/lib/commons/menu/menu_categories";
+import EditorPickPosts from "@/lib/commons/menu/editor_pick_posts";
 
 const Menu = () => {
   return (
@@ -24,7 +25,7 @@ const Menu = () => {
         Chosen by the editor
       </h2>
       <h1 className="text-3xl font-bold mb-6">Editors Pick</h1>
-      <MenuPosts withImage={true} />
+      <EditorPickPosts withImage={true} />
     </div>
   );
 };

@@ -9,6 +9,7 @@ export interface Article {
   image: {
     url: string;
   };
+  editorPick: boolean;
   publishedAt: string;
   category: string;
 }

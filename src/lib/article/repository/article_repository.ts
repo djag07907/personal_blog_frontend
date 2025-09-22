@@ -29,6 +29,7 @@ interface StrapiApiResponse {
       description?: string;
       color?: string;
     };
+    editorPick?: boolean;
     author?: {
       id: number;
       documentId?: string;
@@ -57,9 +58,12 @@ export class StrapiArticleRepository implements ArticleRepository {
 
   async getAll(): Promise<Article[]> {
     try {
-      const response = await fetch(`${this.apiUrl}?populate=author.avatar&populate=image&populate=category`, {
-        cache: "no-store",
-      });
+      const response = await fetch(
+        `${this.apiUrl}?populate=author.avatar&populate=image&populate=category`,
+        {
+          cache: "no-store",
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -143,6 +147,27 @@ export class StrapiArticleRepository implements ArticleRepository {
     }
   }
 
+  async getEditorsPick(): Promise<Article[]> {
+    try {
+      const response = await fetch(
+        `${this.apiUrl}?filters[editorPick][$eq]=true&populate=author.avatar&populate=image&populate=category`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: StrapiApiResponse = await response.json();
+      return data.data.map((item) => this.mapToArticle(item));
+    } catch (error) {
+      console.error("Error fetching editor's pick articles:", error);
+      throw error;
+    }
+  }
+
   private mapToArticle(item: StrapiApiResponse["data"][number]): Article {
     return {
       id: item.id,
@@ -153,6 +178,7 @@ export class StrapiArticleRepository implements ArticleRepository {
       publishedAt: item.publishedAt ?? new Date().toISOString(),
       category: item.category?.name ?? emptyString,
       author: item.author?.name ?? emptyString,
+      editorPick: item.editorPick ?? false,
       authorImage: {
         url: item.author?.avatar?.url
           ? `${baseUrl.replace(/\/$/, "")}${item.author.avatar.url}`
