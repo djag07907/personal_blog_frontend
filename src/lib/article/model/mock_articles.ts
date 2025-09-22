@@ -18,6 +18,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: true,
+    views: 2347,
   },
   {
     id: 2,
@@ -36,6 +37,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: false,
+    views: 1523,
   },
   {
     id: 3,
@@ -53,6 +55,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: true,
+    views: 3201,
   },
   {
     id: 4,
@@ -71,6 +74,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: false,
+    views: 892,
   },
   {
     id: 5,
@@ -89,6 +93,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: true,
+    views: 4156,
   },
   {
     id: 6,
@@ -106,6 +111,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: false,
+    views: 756,
   },
   {
     id: 7,
@@ -124,6 +130,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: false,
+    views: 1987,
   },
   {
     id: 8,
@@ -142,6 +149,7 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: true,
+    views: 2678,
   },
   {
     id: 9,
@@ -159,5 +167,6 @@ export const mockArticles: Article[] = [
       url: "/instagram.png",
     },
     editorPick: false,
+    views: 1234,
   },
 ];

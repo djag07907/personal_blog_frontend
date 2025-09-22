@@ -66,6 +66,17 @@ export class ArticleService {
       return [];
     }
   }
+
+  async getMostPopularArticles(limit: number = 10): Promise<Article[]> {
+    try {
+      const articles = await this.repository.getMostPopular(limit);
+      console.log("Fetched most popular articles from service:", articles);
+      return articles;
+    } catch (error) {
+      console.error("ArticleService: Error fetching most popular articles:", error);
+      return [];
+    }
+  }
 }
 
 const defaultArticleService = new ArticleService();
@@ -75,3 +86,5 @@ export const getArticleBySlug = (slug: string) =>
   defaultArticleService.getArticleBySlug(slug);
 export const getEditorsPickArticles = () => 
   defaultArticleService.getEditorsPickArticles();
+export const getMostPopularArticles = (limit?: number) =>
+  defaultArticleService.getMostPopularArticles(limit);

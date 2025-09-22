@@ -30,6 +30,7 @@ interface StrapiApiResponse {
       color?: string;
     };
     editorPick?: boolean;
+    views?: number;
     author?: {
       id: number;
       documentId?: string;
@@ -168,6 +169,27 @@ export class StrapiArticleRepository implements ArticleRepository {
     }
   }
 
+  async getMostPopular(limit: number = 10): Promise<Article[]> {
+    try {
+      const response = await fetch(
+        `${this.apiUrl}/most-popular?limit=${limit}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: StrapiApiResponse = await response.json();
+      return data.data.map((item) => this.mapToArticle(item));
+    } catch (error) {
+      console.error("Error fetching most popular articles:", error);
+      throw error;
+    }
+  }
+
   private mapToArticle(item: StrapiApiResponse["data"][number]): Article {
     return {
       id: item.id,
@@ -179,6 +201,7 @@ export class StrapiArticleRepository implements ArticleRepository {
       category: item.category?.name ?? emptyString,
       author: item.author?.name ?? emptyString,
       editorPick: item.editorPick ?? false,
+      views: item.views ?? 0,
       authorImage: {
         url: item.author?.avatar?.url
           ? `${baseUrl.replace(/\/$/, "")}${item.author.avatar.url}`

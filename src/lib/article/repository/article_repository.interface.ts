@@ -6,4 +6,5 @@ export interface ArticleRepository {
   getByCategory(category: string): Promise<Article[]>;
   getPaginated(page: number, limit: number): Promise<{ articles: Article[]; total: number }>;
   getEditorsPick(): Promise<Article[]>;
+  getMostPopular(limit?: number): Promise<Article[]>;
 }

@@ -12,4 +12,5 @@ export interface Article {
   editorPick: boolean;
   publishedAt: string;
   category: string;
+  views?: number;
 }
