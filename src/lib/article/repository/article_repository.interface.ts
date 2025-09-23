@@ -7,4 +7,5 @@ export interface ArticleRepository {
   getPaginated(page: number, limit: number): Promise<{ articles: Article[]; total: number }>;
   getEditorsPick(): Promise<Article[]>;
   getMostPopular(limit?: number): Promise<Article[]>;
+  incrementViews(slug: string): Promise<void>;
 }

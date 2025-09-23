@@ -62,7 +62,10 @@ export class ArticleService {
       console.log("Fetched editor's pick articles from service:", articles);
       return articles;
     } catch (error) {
-      console.error("ArticleService: Error fetching editor's pick articles:", error);
+      console.error(
+        "ArticleService: Error fetching editor's pick articles:",
+        error
+      );
       return [];
     }
   }
@@ -73,8 +76,19 @@ export class ArticleService {
       console.log("Fetched most popular articles from service:", articles);
       return articles;
     } catch (error) {
-      console.error("ArticleService: Error fetching most popular articles:", error);
+      console.error(
+        "ArticleService: Error fetching most popular articles:",
+        error
+      );
       return [];
+    }
+  }
+
+  async incrementArticleViews(slug: string): Promise<void> {
+    try {
+      await this.repository.incrementViews(slug);
+    } catch (error) {
+      console.error("ArticleService: Error incrementing article views:", error);
     }
   }
 }
@@ -84,7 +98,9 @@ const defaultArticleService = new ArticleService();
 export const getArticles = () => defaultArticleService.getAllArticles();
 export const getArticleBySlug = (slug: string) =>
   defaultArticleService.getArticleBySlug(slug);
-export const getEditorsPickArticles = () => 
+export const getEditorsPickArticles = () =>
   defaultArticleService.getEditorsPickArticles();
 export const getMostPopularArticles = (limit?: number) =>
   defaultArticleService.getMostPopularArticles(limit);
+export const incrementArticleViews = (slug: string) =>
+  defaultArticleService.incrementArticleViews(slug);

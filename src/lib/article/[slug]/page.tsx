@@ -6,7 +6,7 @@ import { getArticleBySlug } from "@/lib/article/service/article_service";
 import Menu from "@/lib/commons/menu/menu";
 import { formatDate } from "@/lib/commons/utils/date_format";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 interface SinglePageProps {
   params: Promise<{
     slug: string;
@@ -16,9 +16,16 @@ const SinglePage = ({ params }: SinglePageProps) => {
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const hasFetchedRef = useRef(false);
 
   useEffect(() => {
     const fetchArticle = async () => {
+      // Prevent double fetch in React Strict Mode
+      if (hasFetchedRef.current) {
+        return;
+      }
+      hasFetchedRef.current = true;
+
       try {
         const { slug } = await params;
         setLoading(true);
@@ -40,11 +47,12 @@ const SinglePage = ({ params }: SinglePageProps) => {
           publishedAt: "",
           category: "General",
           slug: slug,
+          editorPick: false,
         };
 
         setArticle(finalArticle);
-      } catch (err) {
-        console.error("Error fetching article:", err);
+      } catch (error) {
+        console.error("Error fetching article:", error);
         setError("Failed to load article");
       } finally {
         setLoading(false);

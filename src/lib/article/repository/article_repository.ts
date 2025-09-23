@@ -81,19 +81,21 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getBySlug(slug: string): Promise<Article | null> {
     try {
       const response = await fetch(
-        `${this.apiUrl}?filters[slug][$eq]=${slug}&populate=author.avatar&populate=image&populate=category`,
+        `${this.apiUrl}/${slug}?populate=author.avatar&populate=image&populate=category`,
         {
           cache: "no-store",
         }
       );
 
       if (!response.ok) {
+        if (response.status === 404) {
+          return null;
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const data: StrapiApiResponse = await response.json();
-      const article = data.data[0];
-      return article ? this.mapToArticle(article) : null;
+      const data = await response.json();
+      return data.data ? this.mapToArticle(data.data) : null;
     } catch (error) {
       console.error("Error fetching article by slug:", error);
       throw error;
@@ -172,7 +174,7 @@ export class StrapiArticleRepository implements ArticleRepository {
   async getMostPopular(limit: number = 10): Promise<Article[]> {
     try {
       const response = await fetch(
-        `${this.apiUrl}/most-popular?limit=${limit}`,
+        `${this.apiUrl}?mostPopular=true&limit=${limit}&populate=author.avatar&populate=image&populate=category`,
         {
           cache: "no-store",
         }
@@ -187,6 +189,21 @@ export class StrapiArticleRepository implements ArticleRepository {
     } catch (error) {
       console.error("Error fetching most popular articles:", error);
       throw error;
+    }
+  }
+
+  async incrementViews(slug: string): Promise<void> {
+    try {
+      const response = await fetch(`${this.apiUrl}/${slug}`, {
+        method: "GET",
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        console.warn(`Failed to increment views for article: ${slug}`);
+      }
+    } catch (error) {
+      console.error("Error incrementing article views:", error);
     }
   }
 
