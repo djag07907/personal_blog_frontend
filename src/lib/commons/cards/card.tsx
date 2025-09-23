@@ -29,9 +29,12 @@ const Card = ({ item }: { item: CardItem }) => {
   };
 
   return (
-    <div className="mb-12 flex items-center gap-12" key={item.id}>
+    <div
+      className="mb-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12"
+      key={item.id}
+    >
       {item.img && !imageError && (
-        <div className="relative h-[350px] flex-1 hidden xl:block">
+        <div className="relative h-[250px] md:h-[300px] lg:h-[350px] w-full md:flex-1">
           {imageLoading && (
             <div className="absolute inset-0 bg-gray-200 animate-pulse rounded" />
           )}
@@ -48,22 +51,24 @@ const Card = ({ item }: { item: CardItem }) => {
         </div>
       )}
       {item.img && imageError && (
-        <div className="relative h-[350px] flex-1 hidden xl:block">
+        <div className="relative h-[250px] md:h-[300px] lg:h-[350px] w-full md:flex-1">
           <div className="flex items-center justify-center h-full bg-gray-100 rounded">
             <span className="text-gray-400 text-sm">Image not available</span>
           </div>
         </div>
       )}
-      <div className="flex-1 flex flex-col gap-8">
+      <div className="w-full md:flex-1 flex flex-col gap-4 md:gap-8">
         <div className="text-sm text-gray-500 font-medium">
           <span>{item.createdAt.substring(0, 10)} - </span>
           <span className="text-crimson">{item.catSlug}</span>
         </div>
         <Link href={`/posts/${item.slug}`}>
-          <h1 className="text-2xl font-bold leading-tight">{item.title}</h1>
+          <h1 className="text-xl md:text-2xl font-bold leading-tight">
+            {item.title}
+          </h1>
         </Link>
         <div
-          className="text-base font-light text-muted"
+          className="text-sm md:text-base font-light text-muted"
           dangerouslySetInnerHTML={{ __html: item.desc.substring(0, 60) }}
         />
         <Link

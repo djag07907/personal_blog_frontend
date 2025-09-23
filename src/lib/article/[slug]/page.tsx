@@ -94,9 +94,11 @@ const SinglePage = ({ params }: SinglePageProps) => {
 
   return (
     <div className="container mx-auto p-4 pt-28">
-      <div className="flex gap-12 items-center">
-        <div className="flex-1">
-          <h1 className="text-5xl font-bold mb-12">{article.title}</h1>
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-center">
+        <div className="w-full lg:flex-1">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 lg:mb-12">
+            {article.title}
+          </h1>
           <div className="flex items-center gap-5 mb-6">
             <div className="w-12 h-12 relative">
               <Image
@@ -115,30 +117,30 @@ const SinglePage = ({ params }: SinglePageProps) => {
           </div>
         </div>
         {article.image.url && (
-          <div className="flex-1 h-80 relative">
+          <div className="w-full lg:flex-1 h-64 md:h-80 relative">
             <Image
               src={article.image.url}
               alt="Article Image"
               fill
-              className="object-cover"
+              className="object-cover rounded-lg"
             />
           </div>
         )}
       </div>
-      <div className="flex gap-12 mt-10">
-        <div className="flex-[2]">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-10">
+        <div className="w-full lg:flex-[2]">
           <div
             className="prose max-w-none"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
-          <div className="mt-10 min-h-[200px]">
-            {/* <Comments postSlug={slug} /> */}
-            {/* This space is reserved for the comments component */}
-          </div>
+          {/* <div className="mt-10 min-h-[200px]"> */}
+          {/* <Comments postSlug={slug} /> */}
+          {/* This space is reserved for the comments component */}
+          {/* </div> */}
         </div>
 
-        <div className="flex-1">
-          <Menu />
+        <div className="w-full lg:flex-1">
+          <Menu layout="article" />
         </div>
       </div>
     </div>

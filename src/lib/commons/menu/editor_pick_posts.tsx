@@ -27,7 +27,17 @@ const categoryColors: Record<string, string> = {
   management: "#7fb881",
 };
 
-const EditorPickPosts = ({ withImage }: { withImage: boolean }) => {
+type MenuLayout = "homepage" | "article";
+
+interface EditorPickPostsProps {
+  withImage: boolean;
+  layout?: MenuLayout;
+}
+
+const EditorPickPosts = ({
+  withImage,
+  layout = "homepage",
+}: EditorPickPostsProps) => {
   const getCategoryColor = (
     categoryName: string,
     categories: Category[]
@@ -106,7 +116,7 @@ const EditorPickPosts = ({ withImage }: { withImage: boolean }) => {
   }, [useMockData]);
   if (loading) {
     return (
-      <div className="mt-9 mb-15 flex flex-col gap-9">
+      <div className="mt-6 lg:mt-9 mb-12 lg:mb-15 flex flex-col gap-4 lg:gap-9">
         <div className="text-center py-4">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900 mx-auto"></div>
           <p className="mt-2 text-sm text-gray-600">
@@ -119,7 +129,7 @@ const EditorPickPosts = ({ withImage }: { withImage: boolean }) => {
 
   if (articles.length === 0) {
     return (
-      <div className="mt-9 mb-15 flex flex-col gap-9">
+      <div className="mt-6 lg:mt-9 mb-12 lg:mb-15 flex flex-col gap-4 lg:gap-9">
         <div className="text-center py-4">
           <p className="text-sm text-gray-600">No editor's picks available</p>
         </div>
@@ -128,43 +138,142 @@ const EditorPickPosts = ({ withImage }: { withImage: boolean }) => {
   }
 
   return (
-    <div className="mt-9 mb-15 flex flex-col gap-9">
-      {articles.slice(0, 4).map((article) => (
-        <Link
-          href={`/posts/${article.slug}`}
-          key={article.id}
-          className="flex items-center gap-5 hover:opacity-80 transition-opacity"
-        >
-          {withImage && (
-            <div className="flex-1 aspect-square relative">
-              <Image
-                src={article.image?.url || "/profile.png"}
-                alt={`${article.author} avatar`}
-                fill
-                className="rounded-full border-3 border-gray-300 object-cover"
-              />
-            </div>
-          )}
-
-          <div className="flex-4 flex flex-col gap-1">
-            <span
-              className="inline-block px-2 py-[2px] rounded-[10px] text-xs text-gray-700 w-max"
-              style={{
-                backgroundColor: getCategoryColor(article.category, categories),
-              }}
-            >
-              {article.category}
-            </span>
-            <h3 className="text-lg font-medium text-gray-600 line-clamp-2">
-              {article.title}
-            </h3>
-            <div className="text-xs text-gray-400">
-              <span>{article.author}</span>
-              <span> - {formatDate(article.publishedAt)}</span>
+    <div
+      className={
+        layout === "homepage" ? "mt-9 mb-15" : "mt-6 lg:mt-9 mb-12 lg:mb-15"
+      }
+    >
+      {layout === "article" ? (
+        <>
+          <div className="lg:hidden">
+            <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+              {articles.slice(0, 4).map((article) => (
+                <Link
+                  href={`/posts/${article.slug}`}
+                  key={article.id}
+                  className="flex-shrink-0 w-64 bg-white rounded-lg border border-gray-200 p-4 hover:shadow-md transition-shadow"
+                >
+                  {withImage && (
+                    <div className="w-full h-32 relative mb-3">
+                      <Image
+                        src={article.image?.url || "/profile.png"}
+                        alt={article.title}
+                        fill
+                        className="rounded-lg object-cover"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-col gap-2">
+                    <span
+                      className="inline-block px-2 py-1 rounded-md text-xs text-gray-700 w-max"
+                      style={{
+                        backgroundColor: getCategoryColor(
+                          article.category,
+                          categories
+                        ),
+                      }}
+                    >
+                      {article.category}
+                    </span>
+                    <h3 className="text-sm font-medium text-gray-800 line-clamp-2 leading-tight">
+                      {article.title}
+                    </h3>
+                    <div className="text-xs text-gray-500">
+                      <div>{article.author}</div>
+                      <div>{formatDate(article.publishedAt)}</div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
-        </Link>
-      ))}
+
+          {/* Desktop: Vertical list */}
+          <div className="hidden lg:flex flex-col gap-9">
+            {articles.slice(0, 4).map((article) => (
+              <Link
+                href={`/posts/${article.slug}`}
+                key={article.id}
+                className="flex items-center gap-5 hover:opacity-80 transition-opacity"
+              >
+                {withImage && (
+                  <div className="w-20 h-20 relative flex-shrink-0">
+                    <Image
+                      src={article.image?.url || "/profile.png"}
+                      alt={`${article.author} avatar`}
+                      fill
+                      className="rounded-full border-3 border-gray-300 object-cover"
+                    />
+                  </div>
+                )}
+
+                <div className="flex-1 flex flex-col gap-1">
+                  <span
+                    className="inline-block px-2 py-[2px] rounded-[10px] text-xs text-gray-700 w-max"
+                    style={{
+                      backgroundColor: getCategoryColor(
+                        article.category,
+                        categories
+                      ),
+                    }}
+                  >
+                    {article.category}
+                  </span>
+                  <h3 className="text-lg font-medium text-gray-600 line-clamp-2">
+                    {article.title}
+                  </h3>
+                  <div className="text-xs text-gray-400">
+                    <span>{article.author}</span>
+                    <span> - {formatDate(article.publishedAt)}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="flex flex-col gap-9">
+          {articles.slice(0, 4).map((article) => (
+            <Link
+              href={`/posts/${article.slug}`}
+              key={article.id}
+              className="flex items-center gap-5 hover:opacity-80 transition-opacity"
+            >
+              {withImage && (
+                <div className="flex-1 aspect-square relative">
+                  <Image
+                    src={article.image?.url || "/profile.png"}
+                    alt={`${article.author} avatar`}
+                    fill
+                    className="rounded-full border-3 border-gray-300 object-cover"
+                  />
+                </div>
+              )}
+
+              <div className="flex-4 flex flex-col gap-1">
+                <span
+                  className="inline-block px-2 py-[2px] rounded-[10px] text-xs text-gray-700 w-max"
+                  style={{
+                    backgroundColor: getCategoryColor(
+                      article.category,
+                      categories
+                    ),
+                  }}
+                >
+                  {article.category}
+                </span>
+                <h3 className="text-lg font-medium text-gray-600 line-clamp-2">
+                  {article.title}
+                </h3>
+                <div className="text-xs text-gray-400">
+                  <span>{article.author}</span>
+                  <span> - {formatDate(article.publishedAt)}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
 
       {/* Debug toggle for development */}
       {process.env.NODE_ENV === "development" && (

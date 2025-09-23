@@ -44,10 +44,10 @@ export default function HomePage() {
   }, [useMockData]);
 
   return (
-    <main className="max-w-6xl mx-auto px-4 py-12 pt-20">
+    <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 pt-20">
       <Featured />
       <CategoryList />
-      <div className="flex gap-12">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20">
         {loading ? (
           <div className="flex-2 pt-10">
             <div className="text-center py-8">
