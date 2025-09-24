@@ -4,7 +4,9 @@ const baseUrl = "http://localhost:1337/";
 const api_endpoints = {
   articles: `${baseUrl}api/articles`,
   categories: `${baseUrl}api/categories`,
-  tags: `${baseUrl}api/tags`,
+  contact: `${baseUrl}api/contact`,
+  about: `${baseUrl}api/about`,
+  // tags: `${baseUrl}api/tags`,
   users: `${baseUrl}api/users`,
   auth: `${baseUrl}api/auth/local`,
 } as const;

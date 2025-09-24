@@ -1,5 +1,4 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import { mockArticles } from "@/lib/article/model/mock_articles";
 import { Article } from "@/lib/article/model/article_data";
 
@@ -8,7 +7,6 @@ interface PostProps {
 }
 
 const PostPage = ({ article }: PostProps) => {
-  const router = useRouter();
 
   if (!article) {
     return <p>Loading...</p>;

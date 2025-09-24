@@ -32,13 +32,13 @@ const Footer = () => {
           <Link href="/">About</Link>
           <Link href="/">Contact</Link>
         </div>
-        <div className="flex flex-col gap-2 font-light min-w-[100px]">
+        {/* <div className="flex flex-col gap-2 font-light min-w-[100px]">
           <span className="font-bold">Tags</span>
           <Link href="/">Style</Link>
           <Link href="/">Fashion</Link>
           <Link href="/">Coding</Link>
           <Link href="/">Travel</Link>
-        </div>
+        </div> */}
         <div className="flex flex-col gap-2 font-light min-w-[100px]">
           <span className="font-bold">Social</span>
           <Link href="/">Instagram</Link>

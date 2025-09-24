@@ -34,7 +34,7 @@ main {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
-  
+
   .backdrop-blur-sm {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -50,7 +50,7 @@ nav {
 
 /* Smooth navbar transitions */
 nav * {
-  transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Enhanced gradient text effect */
@@ -216,8 +216,8 @@ img:hover {
   max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -235,15 +235,11 @@ img:hover {
 @media screen and (max-width: 1024px) {
   .wrapper {
     max-width: 768px;
-    padding-left: 40px;
-    padding-right: 40px;
   }
 }
 @media screen and (max-width: 768px) {
   .wrapper {
     max-width: 640px;
-    padding-left: 20px;
-    padding-right: 20px;
   }
 }
 @media screen and (max-width: 640px) {
