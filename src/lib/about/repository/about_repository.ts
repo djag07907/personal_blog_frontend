@@ -3,15 +3,6 @@ import { AboutRepository } from "@/lib/about/repository/about_repository.interfa
 import { baseUrl } from "@/lib/constants/api_constants";
 import { emptyString } from "@/lib/constants/constants";
 
-interface StrapiMediaObject {
-  id: number;
-  name: string;
-  url: string;
-  alternativeText?: string;
-  width?: number;
-  height?: number;
-}
-
 interface StrapiAboutApiResponse {
   data: {
     id: number;
@@ -21,7 +12,14 @@ interface StrapiAboutApiResponse {
     content: string;
     skills?: string[];
     publishedAt: string;
-    image?: StrapiMediaObject;
+    image?: {
+      id: number;
+      name: string;
+      url: string;
+      alternativeText?: string;
+      width?: number;
+      height?: number;
+    };
     experience?: Array<{
       id: number;
       company: string;
@@ -57,18 +55,46 @@ export class StrapiAboutRepository implements AboutRepository {
 
   async getAboutData(): Promise<AboutPageData> {
     try {
-      const response = await fetch(
-        `${this.apiUrl}?populate=image&populate=experience&populate=education&populate=achievements`, 
+      let response = await fetch(
+        `${this.apiUrl}?populate[image]=*&populate[experience]=*&populate[education]=*&populate[achievements]=*`,
         {
           cache: "no-store",
         }
       );
 
+      // If 400 error, try simpler populate syntax
+      if (response.status === 400) {
+        console.warn("Component populate failed, trying simpler syntax");
+        response = await fetch(`${this.apiUrl}?populate=*`, {
+          cache: "no-store",
+        });
+      }
+
       if (!response.ok) {
+        // Handle specific HTTP errors
+        if (response.status === 404) {
+          console.warn(
+            "About content not found in Strapi - will use fallback data"
+          );
+          throw new Error("About content not found");
+        }
+        if (response.status === 400) {
+          console.warn(
+            "Bad request to Strapi API - possibly component structure issue"
+          );
+          throw new Error("Invalid API request");
+        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data: StrapiAboutApiResponse = await response.json();
+
+      // Handle case where data is null (no content created yet)
+      if (!data.data) {
+        console.warn("About data is null - no content created in Strapi yet");
+        throw new Error("No about content available");
+      }
+
       return this.mapToAboutData(data.data);
     } catch (error) {
       console.error("Error fetching about data:", error);
