@@ -66,7 +66,9 @@ const SinglePage = ({ params }: SinglePageProps) => {
       <div className="container mx-auto p-4 pt-28">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-          <span className="ml-3 text-gray-600">Loading article...</span>
+          <span className="ml-3 text-muted drop-shadow-sm">
+            Loading article...
+          </span>
         </div>
       </div>
     );
@@ -86,7 +88,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
     return (
       <div className="container mx-auto p-4 pt-28">
         <div className="text-center py-8">
-          <p className="text-gray-600 text-xl">Article not found</p>
+          <p className="text-muted text-xl drop-shadow-sm">Article not found</p>
         </div>
       </div>
     );
@@ -96,7 +98,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
     <div className="container mx-auto p-4 pt-28">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-center">
         <div className="w-full lg:flex-1">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 lg:mb-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 lg:mb-12 drop-shadow-sm">
             {article.title}
           </h1>
           <div className="flex items-center gap-5 mb-6">
@@ -109,8 +111,10 @@ const SinglePage = ({ params }: SinglePageProps) => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-medium">{article.author}</span>
-              <span className="text-gray-500">
+              <span className="text-lg font-medium drop-shadow-sm">
+                {article.author}
+              </span>
+              <span className="text-muted drop-shadow-sm">
                 {formatDate(article.publishedAt)}
               </span>
             </div>
@@ -129,10 +133,21 @@ const SinglePage = ({ params }: SinglePageProps) => {
       </div>
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-10">
         <div className="w-full lg:flex-[2]">
-          <div
-            className="prose max-w-none"
-            dangerouslySetInnerHTML={{ __html: article.content }}
-          />
+          <div className="relative">
+            <div
+              className="absolute inset-0 rounded-lg -m-4"
+              style={{
+                backgroundColor: "var(--content-bg, #ef4444)",
+              }}
+            ></div>
+            <div
+              className="prose prose-lg max-w-none relative z-10 p-6"
+              style={{
+                color: "var(--content-text, white)",
+              }}
+              dangerouslySetInnerHTML={{ __html: article.content }}
+            />
+          </div>
           {/* <div className="mt-10 min-h-[200px]"> */}
           {/* <Comments postSlug={slug} /> */}
           {/* This space is reserved for the comments component */}

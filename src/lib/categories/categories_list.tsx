@@ -15,31 +15,33 @@ const CategoryList = () => {
         const fetchedCategories = await getCategories();
         setCategories(fetchedCategories);
       } catch (error) {
-        console.error('Failed to fetch categories:', error);
+        console.error("Failed to fetch categories:", error);
         // You could fallback to mock data here if needed
         // setCategories(mockCategories);
       }
     };
-    
+
     fetchCategories();
   }, []);
 
   return (
     <div className="my-12">
-      <h1 className="text-xl font-semibold mb-12">Popular Categories</h1>
+      <h1 className="text-xl font-semibold mb-12 drop-shadow-sm">
+        Popular Categories
+      </h1>
       <div className="flex flex-wrap justify-between gap-5">
         {categories.map((item) => (
           <Link
             href={`/blog?cat=${item.slug}`}
             key={item.id}
-            className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full"
+            className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full drop-shadow-sm"
             style={{
-              backgroundColor: item.color ? `${item.color}33` : '#f3f4f6', // Add 33 for 20% opacity
+              backgroundColor: item.color ? `${item.color}33` : "#f3f4f6",
             }}
           >
             {(item.img || item.image?.url) && (
               <Image
-                src={item.img || item.image?.url || ''}
+                src={item.img || item.image?.url || ""}
                 alt={item.title || item.name}
                 width={32}
                 height={32}

@@ -140,6 +140,8 @@ img:hover {
 .app-container.dark {
   color: white;
   background-color: #0f172a;
+  --content-bg: rgba(0, 0, 0, 0.3);
+  --content-text: #f3f4f6;
   background-image: repeating-linear-gradient(
       0deg,
       transparent,
@@ -178,6 +180,8 @@ img:hover {
 .app-container.light {
   color: #1f2937;
   background-color: #ffffff;
+  --content-bg: rgba(248, 250, 252, 0.92);
+  --content-text: #1f2937;
   background-image: repeating-linear-gradient(
       0deg,
       transparent,

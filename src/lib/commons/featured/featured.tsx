@@ -4,7 +4,7 @@ import Image from "next/image";
 const Featured = () => {
   return (
     <div className="mt-8">
-      <h1 className="text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] xl:text-[70px] font-light">
+      <h1 className="text-[28px] sm:text-[40px] md:text-[56px] lg:text-[64px] xl:text-[70px] font-light drop-shadow-sm">
         <b className="font-bold">Hey, Daniel here!</b> Discover my stories and
         creative ideas.
       </h1>
@@ -22,16 +22,16 @@ const Featured = () => {
 
         {/* Text Container */}
         <div className="flex-1 flex flex-col gap-5">
-          <h1 className="text-3xl md:text-4xl font-bold">
-            Lorem ipsum dolor sit amet alim consectetur adipisicing elit.
+          <h1 className="text-3xl md:text-4xl font-bold drop-shadow-sm">
+            Welcome to my digital space where ideas come to life
           </h1>
-          <p className="text-lg font-light text-[color:var(--softTextColor)]">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Cupiditate, quam nisi magni ea laborum inventore voluptatum
-            laudantium repellat ducimus unde aspernatur fuga. Quo, accusantium
-            quisquam! Harum unde sit culpa debitis.
+          <p className="text-lg font-light text-muted drop-shadow-sm leading-relaxed">
+            Join me on this journey of discovery as I share insights about web
+            development, technology trends, and creative problem-solving. From
+            frontend frameworks to backend architecture, let's explore the world
+            of modern development together.
           </p>
-          <button className="px-5 py-4 rounded bg-blue-800 text-sm font-medium hover:opacity-90 transition">
+          <button className="px-5 py-4 rounded bg-blue-800 text-sm font-medium hover:opacity-90 transition w-fit">
             Read More
           </button>
         </div>

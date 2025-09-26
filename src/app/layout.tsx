@@ -35,8 +35,8 @@ const InnerLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="wrapper">
             <Navbar />
             {children}
-            <Footer />
           </div>
+          <Footer />
         </div>
       </body>
     </html>
