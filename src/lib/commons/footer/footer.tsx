@@ -4,7 +4,10 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="mt-16 py-12 w-full bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <footer className="mt-16 py-12 w-full border-t" style={{
+      backgroundColor: 'var(--footer-bg)',
+      borderColor: 'var(--footer-border)'
+    }}>
       <div className="mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
           <div className="flex-1">
@@ -123,7 +126,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t" style={{
+          borderColor: 'var(--footer-border)'
+        }}>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             {/* <p className="text-sm text-muted drop-shadow-sm">
               Built with Next.js, TypeScript, and Tailwind CSS.
