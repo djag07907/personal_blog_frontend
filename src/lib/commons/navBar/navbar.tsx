@@ -70,6 +70,12 @@ const Navbar: React.FC = () => {
             Home
           </Link>
           <Link
+            href="/posts"
+            className="max-[640px]:hidden px-4 hover:opacity-80 transition-opacity"
+          >
+            Posts
+          </Link>
+          <Link
             href="/contact"
             className="max-[640px]:hidden px-4 hover:opacity-80 transition-opacity"
           >
