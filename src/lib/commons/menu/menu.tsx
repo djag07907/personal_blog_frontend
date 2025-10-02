@@ -12,45 +12,43 @@ interface MenuProps {
 const Menu = ({ layout = "homepage" }: MenuProps) => {
   return (
     <div className={layout === "homepage" ? "flex-1 p-6" : "w-full p-4 lg:p-6"}>
-      <h2 className="text-lg font-semibold text-muted mb-1 drop-shadow-sm">
-        What's hot
-      </h2>
+      <h2 className="text-lg font-semibold text-muted mb-1">What's hot</h2>
       <h1
         className={
           layout === "article"
-            ? "text-3xl font-bold mb-6 drop-shadow-sm"
-            : "text-2xl lg:text-3xl font-bold mb-6 drop-shadow-sm"
+            ? "text-3xl font-bold mb-6"
+            : "text-2xl lg:text-3xl font-bold mb-6"
         }
       >
         Most Popular
       </h1>
       <MostPopularPosts withImage={true} layout={layout} />
 
-      <h2 className="text-lg font-semibold text-muted mt-12 mb-1 drop-shadow-sm">
-        Chosen by the editor
-      </h2>
-      <h1
-        className={
-          layout === "article"
-            ? "text-3xl font-bold mb-6 drop-shadow-sm"
-            : "text-2xl lg:text-3xl font-bold mb-6 drop-shadow-sm"
-        }
-      >
-        Editor's Pick
-      </h1>
-      <MenuCategories />
-
-      <h2 className="text-lg font-semibold text-muted mt-12 mb-1 drop-shadow-sm">
+      <h2 className="text-lg font-semibold text-muted mt-12 mb-1">
         Categories
       </h2>
       <h1
         className={
           layout === "article"
-            ? "text-3xl font-bold mb-6 drop-shadow-sm"
-            : "text-2xl lg:text-3xl font-bold mb-6 drop-shadow-sm"
+            ? "text-3xl font-bold mb-6"
+            : "text-2xl lg:text-3xl font-bold mb-6"
         }
       >
         Discover by topic
+      </h1>
+      <MenuCategories />
+
+      <h2 className="text-lg font-semibold text-muted mt-12 mb-1">
+        Chosen by the editor
+      </h2>
+      <h1
+        className={
+          layout === "article"
+            ? "text-3xl font-bold mb-6"
+            : "text-2xl lg:text-3xl font-bold mb-6"
+        }
+      >
+        Editor's Pick
       </h1>
       <EditorPickPosts withImage={true} layout={layout} />
     </div>

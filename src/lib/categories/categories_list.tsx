@@ -26,7 +26,7 @@ const CategoryList = () => {
 
   return (
     <div className="my-12">
-      <h1 className="text-xl font-semibold mb-12 drop-shadow-sm">
+      <h1 className="text-xl font-semibold mb-12">
         Popular Categories
       </h1>
       <div className="flex flex-wrap justify-between gap-5">
@@ -34,7 +34,7 @@ const CategoryList = () => {
           <Link
             href={`/blog?cat=${item.slug}`}
             key={item.id}
-            className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full drop-shadow-sm"
+            className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full"
             style={{
               backgroundColor: item.color ? `${item.color}33` : "#f3f4f6",
             }}

@@ -59,23 +59,23 @@ const Card = ({ item }: { item: CardItem }) => {
       )}
       <div className="w-full md:flex-1 flex flex-col gap-4 md:gap-8">
         <div className="text-sm text-gray-500 font-medium">
-          <span className="drop-shadow-sm">
+          <span>
             {item.createdAt.substring(0, 10)} -{" "}
           </span>
-          <span className="text-crimson drop-shadow-sm">{item.catSlug}</span>
+          <span className="text-crimson">{item.catSlug}</span>
         </div>
         <Link href={`/posts/${item.slug}`}>
-          <h1 className="text-xl md:text-2xl font-bold leading-tight drop-shadow-sm">
+          <h1 className="text-xl md:text-2xl font-bold leading-tight">
             {item.title}
           </h1>
         </Link>
         <div
-          className="text-sm md:text-base font-light text-muted drop-shadow-sm"
+          className="text-sm md:text-base font-light text-muted"
           dangerouslySetInnerHTML={{ __html: item.desc.substring(0, 60) }}
         />
         <Link
           href={routes.post(item.slug)}
-          className="border-b border-crimson w-max py-0.5 text-crimson drop-shadow-sm"
+          className="border-b border-crimson w-max py-0.5 text-crimson"
         >
           Read More
         </Link>

@@ -66,7 +66,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
       <div className="container mx-auto p-4 pt-28">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-          <span className="ml-3 text-muted drop-shadow-sm">
+          <span className="ml-3 text-muted">
             Loading article...
           </span>
         </div>
@@ -88,7 +88,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
     return (
       <div className="container mx-auto p-4 pt-28">
         <div className="text-center py-8">
-          <p className="text-muted text-xl drop-shadow-sm">Article not found</p>
+          <p className="text-muted text-xl">Article not found</p>
         </div>
       </div>
     );
@@ -98,7 +98,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
     <div className="container mx-auto p-4 pt-28">
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-center">
         <div className="w-full lg:flex-1">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 lg:mb-12 drop-shadow-sm">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-8 lg:mb-12">
             {article.title}
           </h1>
           <div className="flex items-center gap-5 mb-6">
@@ -111,10 +111,10 @@ const SinglePage = ({ params }: SinglePageProps) => {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-medium drop-shadow-sm">
+              <span className="text-lg font-medium">
                 {article.author}
               </span>
-              <span className="text-muted drop-shadow-sm">
+              <span className="text-muted">
                 {formatDate(article.publishedAt)}
               </span>
             </div>

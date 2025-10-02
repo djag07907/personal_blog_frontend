@@ -46,7 +46,7 @@ const CardList = ({ page, mockData, setPage }: CardListProps) => {
 
   return (
     <div className="flex-2 pt-10">
-      <h1 className="text-3xl font-bold mb-12 drop-shadow-sm">Recent Posts</h1>
+      <h1 className="text-3xl font-bold mb-12">Recent Posts</h1>
       <div className="flex flex-col gap-4 transition-opacity duration-300 ease-in-out">
         {paginatedPosts.map((item) => (
           <Card key={item.id} item={item} />
