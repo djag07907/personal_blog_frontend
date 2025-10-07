@@ -59,7 +59,7 @@ const EditorPickPosts = ({
   const [articles, setArticles] = useState<Article[]>(emptyArray);
   const [categories, setCategories] = useState<Category[]>(emptyArray);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [, setError] = useState<string | null>(null);
   const [useMockData, setUseMockData] = useState(false);
 
   useEffect(() => {

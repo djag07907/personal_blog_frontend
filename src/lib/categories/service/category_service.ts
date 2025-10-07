@@ -4,6 +4,10 @@ import { StrapiCategoryRepository } from "@/lib/categories/repository/category_r
 
 export class CategoryService {
   private repository: CategoryRepository;
+  private categoriesCache: Category[] | null = null;
+  private lastFetchTime: number = 0;
+  private fetchInProgress: boolean = false;
+  private readonly CACHE_DURATION = 30000; // 30 seconds
 
   constructor(repository?: CategoryRepository) {
     this.repository = repository ?? new StrapiCategoryRepository();
@@ -11,11 +15,38 @@ export class CategoryService {
 
   async getAllCategories(): Promise<Category[]> {
     try {
+      const now = Date.now();
+
+      if (
+        this.categoriesCache &&
+        now - this.lastFetchTime < this.CACHE_DURATION
+      ) {
+        console.log("CategoryService: Using cached categories");
+        return this.categoriesCache;
+      }
+
+      if (this.fetchInProgress) {
+        console.log("CategoryService: Fetch in progress, waiting...");
+        while (this.fetchInProgress) {
+          await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+        return this.categoriesCache || [];
+      }
+
+      this.fetchInProgress = true;
+      console.log("CategoryService: Fetching categories from API...");
+
       const categories = await this.repository.getAll();
+
+      this.categoriesCache = categories;
+      this.lastFetchTime = now;
+
       return categories;
     } catch (error) {
       console.error("CategoryService: Error fetching all categories:", error);
       return [];
+    } finally {
+      this.fetchInProgress = false;
     }
   }
 

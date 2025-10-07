@@ -18,7 +18,16 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
   useEffect(() => {
     const fetchCategories = async () => {
       try {
+        console.log("CategoryFilter: Fetching categories...");
         const fetchedCategories = await getCategories();
+        console.log(
+          "CategoryFilter: Fetched categories:",
+          fetchedCategories.map((c) => ({
+            name: c.name,
+            slug: c.slug,
+            title: c.title,
+          }))
+        );
         setCategories(fetchedCategories);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -42,7 +51,7 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
       >
         <option value="">All Categories</option>
         {categories.map((category) => (
-          <option key={category.id} value={category.slug}>
+          <option key={category.id} value={category.name}>
             {category.title || category.name}
           </option>
         ))}

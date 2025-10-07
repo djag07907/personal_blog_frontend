@@ -1,6 +1,13 @@
 "use client";
 
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+  useRef,
+  Suspense,
+} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Article } from "@/lib/article/model/article_data";
 import { mockArticles } from "@/lib/article/model/mock_articles";
@@ -14,7 +21,7 @@ import SortFilter, { SortOption } from "@/lib/commons/filters/sort_filter";
 
 const POST_PER_PAGE = 6;
 
-export default function PostsPage() {
+function PostsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -22,6 +29,9 @@ export default function PostsPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [useMockData, setUseMockData] = useState(false);
+  const fetchInProgress = useRef(false);
+  const articlesCache = useRef<Article[]>([]);
+  const lastFetchTime = useRef<number>(0);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -29,10 +39,12 @@ export default function PostsPage() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const category = searchParams?.get("category") || "";
+    const category = decodeURIComponent(searchParams?.get("category") || "");
     const search = searchParams?.get("search") || "";
     const sort = (searchParams?.get("sort") as SortOption) || "newest";
     const pageParam = parseInt(searchParams?.get("page") || "1", 10);
+
+    console.log("URL Parameters:", { category, search, sort, pageParam });
 
     setSelectedCategory(category);
     setSearchQuery(search);
@@ -41,26 +53,78 @@ export default function PostsPage() {
   }, [searchParams]);
 
   useEffect(() => {
+    let isMounted = true;
+    const CACHE_DURATION = 5000; // 5 seconds cache
+
     const fetchArticles = async () => {
       if (useMockData) {
-        setArticles(mockArticles);
-        setLoading(false);
-        setError(null);
-      } else {
+        if (isMounted) {
+          setArticles(mockArticles);
+          setLoading(false);
+          setError(null);
+          articlesCache.current = mockArticles;
+        }
+        return;
+      }
+
+      const now = Date.now();
+      if (
+        articlesCache.current.length > 0 &&
+        now - lastFetchTime.current < CACHE_DURATION
+      ) {
+        console.log("Using cached articles data");
+        if (isMounted) {
+          setArticles(articlesCache.current);
+          setLoading(false);
+          setError(null);
+        }
+        return;
+      }
+
+      if (fetchInProgress.current) {
+        console.log("Fetch already in progress, skipping...");
+        return;
+      }
+
+      fetchInProgress.current = true;
+
+      if (isMounted) {
         setLoading(true);
         setError(null);
-        try {
-          const fetchedArticles = await getArticles();
+      }
+
+      try {
+        console.log("Fetching articles from API...");
+        const fetchedArticles = await getArticles();
+        console.log(
+          "Fetched articles from API:",
+          fetchedArticles.map((a) => ({ title: a.title, category: a.category }))
+        );
+
+        if (isMounted) {
           setArticles(fetchedArticles);
-        } catch (error) {
-          console.error("Failed to fetch articles:", error);
+          articlesCache.current = fetchedArticles;
+          lastFetchTime.current = now;
+        }
+      } catch (error) {
+        console.error("Failed to fetch articles:", error);
+        if (isMounted) {
           setError("Failed to load posts. Please try again.");
-        } finally {
+        }
+      } finally {
+        fetchInProgress.current = false;
+        if (isMounted) {
           setLoading(false);
         }
       }
     };
+
     fetchArticles();
+
+    return () => {
+      isMounted = false;
+      fetchInProgress.current = false;
+    };
   }, [useMockData]);
 
   const updateUrl = useCallback(
@@ -86,11 +150,29 @@ export default function PostsPage() {
   const filteredAndSortedArticles = useMemo(() => {
     let filtered = [...articles];
 
+    console.log("Filtering articles:", {
+      totalArticles: articles.length,
+      selectedCategory,
+    });
+
     if (selectedCategory) {
-      filtered = filtered.filter(
-        (article) =>
-          article.category?.toLowerCase() === selectedCategory.toLowerCase()
-      );
+      filtered = filtered.filter((article) => {
+        const articleCategory = article.category;
+        if (!articleCategory) {
+          return false;
+        }
+
+        const normalizedArticleCategory = articleCategory.toLowerCase().trim();
+        const normalizedSelectedCategory = selectedCategory
+          .toLowerCase()
+          .trim();
+
+        return normalizedArticleCategory === normalizedSelectedCategory;
+      });
+      console.log("After category filtering:", {
+        count: filtered.length,
+        selectedCategory,
+      });
     }
 
     if (searchQuery) {
@@ -222,12 +304,13 @@ export default function PostsPage() {
           )}
         </div>
 
-        {/* Results Summary */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-sm opacity-75 gap-2">
           <div>
             Showing {paginatedArticles.length} of {totalArticles} posts
-            {selectedCategory && <span> in category "{selectedCategory}"</span>}
-            {searchQuery && <span> matching "{searchQuery}"</span>}
+            {selectedCategory && (
+              <span> in category &quot;{selectedCategory}&quot;</span>
+            )}
+            {searchQuery && <span> matching &quot;{searchQuery}&quot;</span>}
           </div>
           {totalPages > 1 && (
             <div>
@@ -295,5 +378,22 @@ export default function PostsPage() {
         </button>
       </div>
     </main>
+  );
+}
+
+export default function PostsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 pt-20">
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-current mx-auto opacity-50"></div>
+            <p className="mt-4 opacity-75">Loading posts...</p>
+          </div>
+        </div>
+      }
+    >
+      <PostsPageContent />
+    </Suspense>
   );
 }

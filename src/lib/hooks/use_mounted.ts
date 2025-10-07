@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 /**
  * Hook to prevent hydration mismatches by tracking mount state
  * Use this when you need to access browser-only APIs or localStorage
- * 
+ *
  * @example
  * const mounted = useMounted();
  * if (!mounted) return <div>Loading...</div>; // or return SSR-safe content
@@ -22,14 +22,17 @@ export function useMounted() {
 
 /**
  * Hook for safely accessing localStorage with SSR
- * Returns null during SSR, actual value after hydration
- * 
+ * Returns [value, setValue] tuple where value is null during SSR
+ *
  * @param key - localStorage key
  * @param defaultValue - default value to use
  * @example
- * const theme = useLocalStorage('theme', 'light');
+ * const [theme, setTheme] = useLocalStorage('theme', 'light');
  */
-export function useLocalStorage<T>(key: string, defaultValue: T): T | null {
+export function useLocalStorage<T>(
+  key: string,
+  defaultValue: T
+): [T | null, (value: T | ((val: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T | null>(null);
   const mounted = useMounted();
 
@@ -48,14 +51,16 @@ export function useLocalStorage<T>(key: string, defaultValue: T): T | null {
 
   const setValue = (value: T | ((val: T) => T)) => {
     if (!mounted) return;
-    
+
     try {
-      setStoredValue(value instanceof Function ? value(storedValue || defaultValue) : value);
-      window.localStorage.setItem(key, JSON.stringify(value));
+      const newValue =
+        value instanceof Function ? value(storedValue || defaultValue) : value;
+      setStoredValue(newValue);
+      window.localStorage.setItem(key, JSON.stringify(newValue));
     } catch (error) {
       console.warn(`Error setting localStorage key "${key}":`, error);
     }
   };
 
-  return mounted ? storedValue : null;
+  return [mounted ? storedValue : null, setValue];
 }

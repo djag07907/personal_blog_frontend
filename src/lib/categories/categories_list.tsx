@@ -13,6 +13,14 @@ const CategoryList = () => {
     const fetchCategories = async () => {
       try {
         const fetchedCategories = await getCategories();
+        console.log(
+          "CategoryList: Fetched categories:",
+          fetchedCategories.map((c) => ({
+            name: c.name,
+            slug: c.slug,
+            title: c.title,
+          }))
+        );
         setCategories(fetchedCategories);
       } catch (error) {
         console.error("Failed to fetch categories:", error);
@@ -29,7 +37,9 @@ const CategoryList = () => {
       <div className="flex flex-wrap justify-between gap-5">
         {categories.map((item) => (
           <Link
-            href={`/posts?category=${item.slug}`}
+            href={`/posts?category=${encodeURIComponent(
+              item.name || item.title || ""
+            )}`}
             key={item.id}
             className="capitalize flex items-center justify-center gap-2 font-medium text-sm w-[15%] h-20 rounded-lg transition-transform hover:opacity-90 hover:scale-[1.02] xl:w-[20%] lg:w-[25%] md:w-[45%] sm:w-full"
             style={{

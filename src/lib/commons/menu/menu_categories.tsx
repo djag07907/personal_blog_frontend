@@ -14,6 +14,14 @@ const MenuCategories = () => {
       try {
         setLoading(true);
         const fetchedCategories = await getCategories();
+        console.log(
+          "MenuCategories: Fetched categories:",
+          fetchedCategories.map((c) => ({
+            name: c.name,
+            slug: c.slug,
+            title: c.title,
+          }))
+        );
         // Limit to first 6 categories for the sidebar menu
         setCategories(fetchedCategories.slice(0, 6));
       } catch (error) {
@@ -45,7 +53,9 @@ const MenuCategories = () => {
       {categories.map((category) => (
         <Link
           key={category.id}
-          href={`/blog?cat=${category.slug}`}
+          href={`/posts?category=${encodeURIComponent(
+            category.name || category.title || ""
+          )}`}
           className="px-[25px] py-[10px] rounded-[10px] text-sm transition-opacity hover:opacity-80"
           style={{
             backgroundColor: category.color ? `${category.color}33` : "#f3f4f6", // Add 33 for 20% opacity
