@@ -11,7 +11,7 @@ body {
   font-family: var(--font-sans), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
+  background-color: #f8fafc;
 }
 
 html,
@@ -92,7 +92,7 @@ img:hover {
 }
 
 .bg-radial-gradient {
-  background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, #f8fafc 100%);
+  background: radial-gradient(125% 125% at 50% 10%, #f8fafc 40%, #f1f5f9 100%);
 }
 
 .bg-circuit-pattern {
@@ -142,8 +142,16 @@ img:hover {
   background-color: #0f172a;
   --content-bg: rgba(0, 0, 0, 0.3);
   --content-text: #f3f4f6;
+  --content-text-muted: #9ca3af;
+  --content-text-light: #6b7280;
   --footer-bg: #0c1220;
   --footer-border: #1f2937;
+  --footer-text: #f3f4f6;
+  --accent-blue: #60a5fa;
+  --accent-blue-hover: #3b82f6;
+  --border-color: #374151;
+  --card-bg: rgba(0, 0, 0, 0.4);
+  --hover-bg: rgba(31, 41, 55, 0.5);
   background-image: repeating-linear-gradient(
       0deg,
       transparent,
@@ -180,42 +188,50 @@ img:hover {
 }
 
 .app-container.light {
-  color: #1f2937;
-  background-color: #ffffff;
-  --content-bg: rgba(248, 250, 252, 0.92);
-  --content-text: #1f2937;
-  --footer-bg: #f8f9fa;
-  --footer-border: #e2e8f0;
+  color: #1e3a5f;
+  background-color: #f8fafc;
+  --content-bg: rgba(241, 245, 249, 0.95);
+  --content-text: #1e3a5f;
+  --content-text-muted: #64748b;
+  --content-text-light: #94a3b8;
+  --footer-bg: #1e3a5f;
+  --footer-border: #334155;
+  --footer-text: #ffffff;
+  --accent-blue: #3b82f6;
+  --accent-blue-hover: #2563eb;
+  --border-color: #cbd5e1;
+  --card-bg: rgba(248, 250, 252, 0.9);
+  --hover-bg: rgba(226, 232, 240, 0.5);
   background-image: repeating-linear-gradient(
       0deg,
       transparent,
       transparent 19px,
-      rgba(75, 85, 99, 0.08) 19px,
-      rgba(75, 85, 99, 0.08) 20px,
+      rgba(30, 58, 95, 0.04) 19px,
+      rgba(30, 58, 95, 0.04) 20px,
       transparent 20px,
       transparent 39px,
-      rgba(75, 85, 99, 0.08) 39px,
-      rgba(75, 85, 99, 0.08) 40px
+      rgba(30, 58, 95, 0.04) 39px,
+      rgba(30, 58, 95, 0.04) 40px
     ),
     repeating-linear-gradient(
       90deg,
       transparent,
       transparent 19px,
-      rgba(75, 85, 99, 0.08) 19px,
-      rgba(75, 85, 99, 0.08) 20px,
+      rgba(30, 58, 95, 0.04) 19px,
+      rgba(30, 58, 95, 0.04) 20px,
       transparent 20px,
       transparent 39px,
-      rgba(75, 85, 99, 0.08) 39px,
-      rgba(75, 85, 99, 0.08) 40px
+      rgba(30, 58, 95, 0.04) 39px,
+      rgba(30, 58, 95, 0.04) 40px
     ),
     radial-gradient(
       circle at 20px 20px,
-      rgba(55, 65, 81, 0.12) 2px,
+      rgba(30, 58, 95, 0.06) 2px,
       transparent 2px
     ),
     radial-gradient(
       circle at 40px 40px,
-      rgba(55, 65, 81, 0.12) 2px,
+      rgba(100, 116, 139, 0.08) 2px,
       transparent 2px
     );
 }
