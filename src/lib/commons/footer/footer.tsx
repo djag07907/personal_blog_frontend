@@ -26,10 +26,10 @@ const Footer = () => {
               <h2 className="text-xl font-bold">Daniel Alvarez</h2>
             </div>
             <p className="mb-6 leading-relaxed max-w-md opacity-90">
-              Full-stack web & mobile software engineer passionate about
-              creating innovative web and mobile solutions. I write about modern
-              technologies, best practices, and share insights from my
-              development journey.
+              Web & mobile software engineer sharing expertise in modern
+              development. Helping developers and non-techs to build better
+              cross-platform applications and dive into the software development
+              process.
             </p>
             <div className="text-sm opacity-75">
               © {new Date().getFullYear()} Daniel Alvarez. All rights reserved.

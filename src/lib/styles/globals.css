@@ -132,6 +132,15 @@ img:hover {
   background-size: 40px 40px, 40px 40px, 40px 40px, 40px 40px;
 }
 
+.bg-grid-pattern {
+  background-image: linear-gradient(
+      rgba(59, 130, 246, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 .app-container {
   min-height: 100vh;
   width: 100%;
@@ -195,7 +204,7 @@ img:hover {
   --content-text-muted: #64748b;
   --content-text-light: #94a3b8;
   --footer-bg: #1e3a5f;
-  --footer-border: #334155;
+  --footer-border: #c8ccd2;
   --footer-text: #ffffff;
   --accent-blue: #3b82f6;
   --accent-blue-hover: #2563eb;
