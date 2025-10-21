@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [localValue, onChange]);
+  }, [localValue]);
 
   return (
     <div className="relative w-full max-w-md">

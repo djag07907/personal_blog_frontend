@@ -30,7 +30,6 @@ const SinglePage = ({ params }: SinglePageProps) => {
   const hasFetchedRef = useRef(false);
 
   const copyToClipboard = (code: string, id: string) => {
-    console.log("Attempting to copy code:", code.substring(0, 50) + "...");
     if (!code || code.trim().length === 0) {
       console.warn("No code to copy");
       return;
@@ -38,7 +37,6 @@ const SinglePage = ({ params }: SinglePageProps) => {
     navigator.clipboard
       .writeText(code)
       .then(() => {
-        console.log("Successfully copied code");
         setCopiedId(id);
         setTimeout(() => setCopiedId(null), 2000); // Reset after 2 seconds
       })
@@ -289,20 +287,9 @@ const SinglePage = ({ params }: SinglePageProps) => {
                 components={{
                   pre: ({ children, ...props }) => {
                     const codeText = extractCodeText(children);
-                    console.log(
-                      "Pre component - extracted code text:",
-                      codeText.substring(0, 50) + "..."
-                    );
+
                     const blockId = getCodeBlockId(codeText);
                     const isCopied = copiedId === blockId;
-                    console.log(
-                      "Block ID:",
-                      blockId,
-                      "Copied ID:",
-                      copiedId,
-                      "Is Copied:",
-                      isCopied
-                    );
 
                     return (
                       <div className="relative group">

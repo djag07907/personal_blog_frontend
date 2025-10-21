@@ -91,7 +91,6 @@ const MostPopularPosts = ({
           } else {
             setArticles(fetchedArticles);
             setCategories(fetchedCategories);
-            console.log("Fetched most popular articles:", fetchedArticles);
           }
         } catch (error) {
           console.error("Failed to fetch most popular articles:", error);

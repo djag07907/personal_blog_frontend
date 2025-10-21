@@ -21,12 +21,10 @@ export class CategoryService {
         this.categoriesCache &&
         now - this.lastFetchTime < this.CACHE_DURATION
       ) {
-        console.log("CategoryService: Using cached categories");
         return this.categoriesCache;
       }
 
       if (this.fetchInProgress) {
-        console.log("CategoryService: Fetch in progress, waiting...");
         while (this.fetchInProgress) {
           await new Promise((resolve) => setTimeout(resolve, 100));
         }
@@ -34,7 +32,6 @@ export class CategoryService {
       }
 
       this.fetchInProgress = true;
-      console.log("CategoryService: Fetching categories from API...");
 
       const categories = await this.repository.getAll();
 
@@ -43,7 +40,7 @@ export class CategoryService {
 
       return categories;
     } catch (error) {
-      console.error("CategoryService: Error fetching all categories:", error);
+      console.error("Error fetching categories:", error);
       return [];
     } finally {
       this.fetchInProgress = false;

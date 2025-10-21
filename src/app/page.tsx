@@ -31,7 +31,6 @@ export default function HomePage() {
         try {
           const fetchedArticles = await getArticles();
           setArticles(fetchedArticles);
-          console.log("Fetched articles:", fetchedArticles);
         } catch (error) {
           console.error("Failed to fetch articles:", error);
           setError("Failed to load articles. Please try again.");

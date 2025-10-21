@@ -6,7 +6,6 @@ import React, {
   useCallback,
   useMemo,
   useRef,
-  Suspense,
 } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Article } from "@/lib/article/model/article_data";
@@ -29,103 +28,29 @@ function PostsPageContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [useMockData, setUseMockData] = useState(false);
-  const fetchInProgress = useRef(false);
-  const articlesCache = useRef<Article[]>([]);
-  const lastFetchTime = useRef<number>(0);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState<SortOption>("newest");
   const [page, setPage] = useState(1);
 
+  // Fetch articles ONCE on mount (service handles caching)
   useEffect(() => {
-    const category = decodeURIComponent(searchParams?.get("category") || "");
-    const search = searchParams?.get("search") || "";
-    const sort = (searchParams?.get("sort") as SortOption) || "newest";
-    const pageParam = parseInt(searchParams?.get("page") || "1", 10);
-
-    console.log("URL Parameters:", { category, search, sort, pageParam });
-
-    setSelectedCategory(category);
-    setSearchQuery(search);
-    setSortBy(sort);
-    setPage(Math.max(1, pageParam));
-  }, [searchParams]);
-
-  useEffect(() => {
-    let isMounted = true;
-    const CACHE_DURATION = 5000; // 5 seconds cache
-
     const fetchArticles = async () => {
-      if (useMockData) {
-        if (isMounted) {
-          setArticles(mockArticles);
-          setLoading(false);
-          setError(null);
-          articlesCache.current = mockArticles;
-        }
-        return;
-      }
-
-      const now = Date.now();
-      if (
-        articlesCache.current.length > 0 &&
-        now - lastFetchTime.current < CACHE_DURATION
-      ) {
-        console.log("Using cached articles data");
-        if (isMounted) {
-          setArticles(articlesCache.current);
-          setLoading(false);
-          setError(null);
-        }
-        return;
-      }
-
-      if (fetchInProgress.current) {
-        console.log("Fetch already in progress, skipping...");
-        return;
-      }
-
-      fetchInProgress.current = true;
-
-      if (isMounted) {
-        setLoading(true);
-        setError(null);
-      }
-
+      setLoading(true);
+      setError(null);
       try {
-        console.log("Fetching articles from API...");
         const fetchedArticles = await getArticles();
-        console.log(
-          "Fetched articles from API:",
-          fetchedArticles.map((a) => ({ title: a.title, category: a.category }))
-        );
-
-        if (isMounted) {
-          setArticles(fetchedArticles);
-          articlesCache.current = fetchedArticles;
-          lastFetchTime.current = now;
-        }
+        setArticles(fetchedArticles);
       } catch (error) {
         console.error("Failed to fetch articles:", error);
-        if (isMounted) {
-          setError("Failed to load posts. Please try again.");
-        }
+        setError("Failed to load posts. Please try again.");
       } finally {
-        fetchInProgress.current = false;
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
-
     fetchArticles();
-
-    return () => {
-      isMounted = false;
-      fetchInProgress.current = false;
-    };
-  }, [useMockData]);
+  }, []); // Empty dependency array - run only once on mount
 
   const updateUrl = useCallback(
     (
@@ -150,11 +75,6 @@ function PostsPageContent() {
   const filteredAndSortedArticles = useMemo(() => {
     let filtered = [...articles];
 
-    console.log("Filtering articles:", {
-      totalArticles: articles.length,
-      selectedCategory,
-    });
-
     if (selectedCategory) {
       filtered = filtered.filter((article) => {
         const articleCategory = article.category;
@@ -168,10 +88,6 @@ function PostsPageContent() {
           .trim();
 
         return normalizedArticleCategory === normalizedSelectedCategory;
-      });
-      console.log("After category filtering:", {
-        count: filtered.length,
-        selectedCategory,
       });
     }
 
@@ -230,28 +146,40 @@ function PostsPageContent() {
     })
   );
 
-  const handleCategoryChange = (category: string) => {
-    setSelectedCategory(category);
-    setPage(1);
-    updateUrl(category, searchQuery, sortBy, 1);
-  };
+  const handleCategoryChange = useCallback(
+    (category: string) => {
+      setSelectedCategory(category);
+      setPage(1);
+      updateUrl(category, searchQuery, sortBy, 1);
+    },
+    [updateUrl, searchQuery, sortBy]
+  );
 
-  const handleSearchChange = (search: string) => {
-    setSearchQuery(search);
-    setPage(1);
-    updateUrl(selectedCategory, search, sortBy, 1);
-  };
+  const handleSearchChange = useCallback(
+    (search: string) => {
+      setSearchQuery(search);
+      setPage(1);
+      updateUrl(selectedCategory, search, sortBy, 1);
+    },
+    [updateUrl, selectedCategory, sortBy]
+  );
 
-  const handleSortChange = (sort: SortOption) => {
-    setSortBy(sort);
-    setPage(1);
-    updateUrl(selectedCategory, searchQuery, sort, 1);
-  };
+  const handleSortChange = useCallback(
+    (sort: SortOption) => {
+      setSortBy(sort);
+      setPage(1);
+      updateUrl(selectedCategory, searchQuery, sort, 1);
+    },
+    [updateUrl, selectedCategory, searchQuery]
+  );
 
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-    updateUrl(selectedCategory, searchQuery, sortBy, newPage);
-  };
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      setPage(newPage);
+      updateUrl(selectedCategory, searchQuery, sortBy, newPage);
+    },
+    [updateUrl, selectedCategory, searchQuery, sortBy]
+  );
 
   const clearFilters = () => {
     setSelectedCategory("");
@@ -381,19 +309,4 @@ function PostsPageContent() {
   );
 }
 
-export default function PostsPage() {
-  return (
-    <Suspense
-      fallback={
-        <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 pt-20">
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-current mx-auto opacity-50"></div>
-            <p className="mt-4 opacity-75">Loading posts...</p>
-          </div>
-        </div>
-      }
-    >
-      <PostsPageContent />
-    </Suspense>
-  );
-}
+export default PostsPageContent;

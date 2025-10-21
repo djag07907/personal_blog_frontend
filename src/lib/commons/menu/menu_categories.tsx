@@ -14,14 +14,7 @@ const MenuCategories = () => {
       try {
         setLoading(true);
         const fetchedCategories = await getCategories();
-        console.log(
-          "MenuCategories: Fetched categories:",
-          fetchedCategories.map((c) => ({
-            name: c.name,
-            slug: c.slug,
-            title: c.title,
-          }))
-        );
+
         // Limit to first 6 categories for the sidebar menu
         setCategories(fetchedCategories.slice(0, 6));
       } catch (error) {

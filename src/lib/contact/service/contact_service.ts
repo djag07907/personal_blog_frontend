@@ -12,7 +12,6 @@ export class ContactService {
   async getContactData(): Promise<ContactPageData | null> {
     try {
       const contactData = await this.repository.getContactData();
-      console.log("Fetched contact data from service:", contactData);
       return contactData;
     } catch (error) {
       console.error("ContactService: Error fetching contact data:", error);

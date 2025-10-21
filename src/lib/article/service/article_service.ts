@@ -4,6 +4,9 @@ import { StrapiArticleRepository } from "@/lib/article/repository/article_reposi
 
 export class ArticleService {
   private repository: ArticleRepository;
+  private articlesCache: Article[] | null = null;
+  private lastFetchTime: number = 0;
+  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
   constructor(repository?: ArticleRepository) {
     this.repository = repository ?? new StrapiArticleRepository();
@@ -11,13 +14,28 @@ export class ArticleService {
 
   async getAllArticles(): Promise<Article[]> {
     try {
+      const now = Date.now();
+
+      if (
+        this.articlesCache &&
+        now - this.lastFetchTime < this.CACHE_DURATION
+      ) {
+        return this.articlesCache;
+      }
+
       const articles = await this.repository.getAll();
-      console.log("Fetched articles from service:", articles);
+      this.articlesCache = articles;
+      this.lastFetchTime = now;
       return articles;
     } catch (error) {
-      console.error("ArticleService: Error fetching all articles:", error);
-      return [];
+      console.error("[ArticleService] Error fetching all articles:", error);
+      return this.articlesCache || [];
     }
+  }
+
+  clearCache(): void {
+    this.articlesCache = null;
+    this.lastFetchTime = 0;
   }
 
   async getArticleBySlug(slug: string): Promise<Article | null> {
@@ -59,7 +77,6 @@ export class ArticleService {
   async getEditorsPickArticles(): Promise<Article[]> {
     try {
       const articles = await this.repository.getEditorsPick();
-      console.log("Fetched editor's pick articles from service:", articles);
       return articles;
     } catch (error) {
       console.error(
@@ -73,7 +90,6 @@ export class ArticleService {
   async getMostPopularArticles(limit: number = 10): Promise<Article[]> {
     try {
       const articles = await this.repository.getMostPopular(limit);
-      console.log("Fetched most popular articles from service:", articles);
       return articles;
     } catch (error) {
       console.error(

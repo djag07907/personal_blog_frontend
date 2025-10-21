@@ -43,11 +43,6 @@ const EditorPickPosts = ({
     categories: Category[]
   ): string => {
     const category = categories.find((cat) => cat.name === categoryName);
-    console.log("Debug category matching:", {
-      categoryName,
-      foundCategory: category,
-      categories: categories.map((c) => ({ name: c.name, color: c.color })),
-    });
 
     let color =
       category?.color ||
@@ -93,10 +88,6 @@ const EditorPickPosts = ({
           } else {
             setArticles(fetchedArticles);
             setCategories(fetchedCategories);
-            console.log(
-              "Fetched categories for color matching:",
-              fetchedCategories
-            );
           }
         } catch (error) {
           console.error("Failed to fetch editor's pick data:", error);

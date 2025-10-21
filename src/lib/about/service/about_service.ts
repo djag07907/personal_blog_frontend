@@ -13,7 +13,6 @@ export class AboutService {
   async getAboutData(): Promise<AboutPageData> {
     try {
       const aboutData = await this.repository.getAboutData();
-      console.log("Fetched about data from service:", aboutData);
 
       return mergeWithFallback(aboutData);
     } catch (error) {
