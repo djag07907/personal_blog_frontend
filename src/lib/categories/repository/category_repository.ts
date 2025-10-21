@@ -82,6 +82,16 @@ export class StrapiCategoryRepository implements CategoryRepository {
   private mapToCategory(
     item: StrapiCategoryApiResponse["data"][number]
   ): Category {
+    const getImageUrl = (url?: string): string => {
+      if (!url) return emptyString;
+      // If the URL is already absolute (starts with http/https), return it as is
+      if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+      }
+      // Otherwise, prepend the base URL
+      return `${baseUrl.replace(/\/$/, "")}${url}`;
+    };
+
     return {
       id: item.id,
       name: item.name ?? emptyString,
@@ -89,14 +99,10 @@ export class StrapiCategoryRepository implements CategoryRepository {
       description: item.description ?? emptyString,
       color: item.color ?? "#000000",
       image: {
-        url: item.image?.url
-          ? `${baseUrl.replace(/\/$/, "")}${item.image.url}`
-          : emptyString,
+        url: getImageUrl(item.image?.url),
       },
       title: item.name ?? emptyString,
-      img: item.image?.url
-        ? `${baseUrl.replace(/\/$/, "")}${item.image.url}`
-        : emptyString,
+      img: getImageUrl(item.image?.url),
     };
   }
 }

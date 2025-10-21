@@ -14,8 +14,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "sincere-wisdom-8c843dc61b.strapiapp.com",
+        hostname: "smart-butterfly-69365734a8.strapiapp.com",
         pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "smart-butterfly-69365734a8.media.strapiapp.com",
+        pathname: "/**",
       },
     ],
   },

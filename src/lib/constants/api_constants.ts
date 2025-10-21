@@ -1,5 +1,5 @@
-// const baseUrl = "https://sincere-wisdom-8c843dc61b.strapiapp.com/";
-const baseUrl = "http://localhost:1337/";
+const baseUrl = "https://smart-butterfly-69365734a8.strapiapp.com/";
+// const baseUrl = "http://localhost:1337/";
 
 const api_endpoints = {
   articles: `${baseUrl}api/articles`,

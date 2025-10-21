@@ -208,6 +208,16 @@ export class StrapiArticleRepository implements ArticleRepository {
   }
 
   private mapToArticle(item: StrapiApiResponse["data"][number]): Article {
+    const getImageUrl = (url?: string): string => {
+      if (!url) return emptyString;
+      // If the URL is already absolute (starts with http/https), return it as is
+      if (url.startsWith("http://") || url.startsWith("https://")) {
+        return url;
+      }
+      // Otherwise, prepend the base URL
+      return `${baseUrl.replace(/\/$/, "")}${url}`;
+    };
+
     return {
       id: item.id,
       title: item.title ?? "missing title",
@@ -220,14 +230,10 @@ export class StrapiArticleRepository implements ArticleRepository {
       editorPick: item.editorPick ?? false,
       views: item.views ?? 0,
       authorImage: {
-        url: item.author?.avatar?.url
-          ? `${baseUrl.replace(/\/$/, "")}${item.author.avatar.url}`
-          : emptyString,
+        url: getImageUrl(item.author?.avatar?.url),
       },
       image: {
-        url: item.image?.url
-          ? `${baseUrl.replace(/\/$/, "")}${item.image.url}`
-          : emptyString,
+        url: getImageUrl(item.image?.url),
       },
     };
   }
