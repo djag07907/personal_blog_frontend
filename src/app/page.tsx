@@ -7,6 +7,7 @@ import CategoryList from "@/lib/categories/categories_list";
 import ProfessionalHero from "@/lib/commons/hero/professional_hero";
 import CardList from "@/lib/commons/lists/cards_list";
 import Menu from "@/lib/commons/menu/menu";
+import Loader from "@/lib/commons/loader/loader";
 import { emptyArray } from "@/lib/constants/constants";
 import { useEffect, useState } from "react";
 
@@ -50,10 +51,7 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-16 xl:gap-20">
           {loading ? (
             <div className="flex-2 pt-10">
-              <div className="text-center py-8">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto"></div>
-                <p className="mt-2 text-gray-600">Loading articles...</p>
-              </div>
+              <Loader message="Loading articles" />
             </div>
           ) : error ? (
             <div className="flex-2 pt-10">

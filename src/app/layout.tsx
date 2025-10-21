@@ -8,6 +8,7 @@ import {
   ThemeContext,
   ThemeContextProvider,
 } from "@/lib/commons/context/theme_context";
+import { LoadingProvider } from "@/lib/commons/context/loading_context";
 import { useContext } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <ThemeContextProvider>
-      <InnerLayout>{children}</InnerLayout>
+      <LoadingProvider>
+        <InnerLayout>{children}</InnerLayout>
+      </LoadingProvider>
     </ThemeContextProvider>
   );
 }

@@ -1,15 +1,8 @@
 "use client";
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Article } from "@/lib/article/model/article_data";
-import { mockArticles } from "@/lib/article/model/mock_articles";
 import { getArticles } from "@/lib/article/service/article_service";
 import { emptyArray } from "@/lib/constants/constants";
 import Card from "@/lib/commons/cards/card";
@@ -17,15 +10,16 @@ import Pagination from "@/lib/commons/pagination/pagination";
 import SearchBar from "@/lib/commons/filters/search_bar";
 import CategoryFilter from "@/lib/commons/filters/category_filter";
 import SortFilter, { SortOption } from "@/lib/commons/filters/sort_filter";
+import { useLoading } from "@/lib/commons/context/loading_context";
 
 const POST_PER_PAGE = 6;
 
 function PostsPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { showLoader, hideLoader } = useLoading();
 
   const [articles, setArticles] = useState<Article[]>(emptyArray);
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [useMockData, setUseMockData] = useState(false);
 
@@ -37,7 +31,7 @@ function PostsPageContent() {
   // Fetch articles ONCE on mount (service handles caching)
   useEffect(() => {
     const fetchArticles = async () => {
-      setLoading(true);
+      showLoader("Loading posts");
       setError(null);
       try {
         const fetchedArticles = await getArticles();
@@ -46,7 +40,7 @@ function PostsPageContent() {
         console.error("Failed to fetch articles:", error);
         setError("Failed to load posts. Please try again.");
       } finally {
-        setLoading(false);
+        hideLoader();
       }
     };
     fetchArticles();
@@ -248,12 +242,7 @@ function PostsPageContent() {
         </div>
       </div>
 
-      {loading ? (
-        <div className="text-center py-12">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-current mx-auto opacity-50"></div>
-          <p className="mt-4 opacity-75">Loading posts...</p>
-        </div>
-      ) : error ? (
+      {error ? (
         <div className="text-center py-12">
           <p className="text-red-500 mb-4">{error}</p>
           <button
