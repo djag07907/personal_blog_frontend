@@ -27,8 +27,6 @@ const SinglePage = ({ params }: SinglePageProps) => {
   const [error, setError] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isRealArticle, setIsRealArticle] = useState(false);
-  const codeBlockIdsRef = useRef<Map<string, string>>(new Map());
-  const codeBlockCounterRef = useRef(0);
   const hasFetchedRef = useRef(false);
 
   const copyToClipboard = (code: string, id: string) => {
