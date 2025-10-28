@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useMemo } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Article } from "@/lib/article/model/article_data";
 import { getArticles } from "@/lib/article/service/article_service";
 import { emptyArray } from "@/lib/constants/constants";
@@ -16,7 +16,6 @@ const POST_PER_PAGE = 6;
 
 function PostsPageContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { showLoader, hideLoader } = useLoading();
 
   const [articles, setArticles] = useState<Article[]>(emptyArray);
