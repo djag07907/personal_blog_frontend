@@ -13,6 +13,7 @@ import remarkHeadingId from "remark-heading-id";
 import rehypeHighlight from "rehype-highlight";
 import rehypeRaw from "rehype-raw";
 import { ThemeContext } from "@/lib/commons/context/theme_context";
+import { SocialShare } from "@/components/SocialShare";
 import "highlight.js/styles/github-dark.css";
 interface SinglePageProps {
   params: Promise<{
@@ -25,6 +26,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const [isRealArticle, setIsRealArticle] = useState(false);
   const codeBlockIdsRef = useRef<Map<string, string>>(new Map());
   const codeBlockCounterRef = useRef(0);
   const hasFetchedRef = useRef(false);
@@ -148,8 +150,11 @@ const SinglePage = ({ params }: SinglePageProps) => {
         setLoading(true);
 
         let data = await getArticleBySlug(slug);
+        let fromRealAPI = false;
 
-        if (!data) {
+        if (data) {
+          fromRealAPI = true;
+        } else {
           data = mockArticles.find((article) => article.slug === slug) || null;
         }
 
@@ -168,6 +173,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
         };
 
         setArticle(finalArticle);
+        setIsRealArticle(fromRealAPI);
       } catch (error) {
         console.error("Error fetching article:", error);
         setError("Failed to load article");
@@ -266,6 +272,17 @@ const SinglePage = ({ params }: SinglePageProps) => {
           </div>
         )}
       </div>
+      {/* Social Share Component - Only for real articles */}
+      {isRealArticle && (
+        <div className="mt-8">
+          <SocialShare
+            url={typeof window !== "undefined" ? window.location.href : ""}
+            title={article.title}
+            description={article.description}
+          />
+        </div>
+      )}
+
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 mt-10">
         <div className="w-full lg:flex-[2]">
           <div className="relative">
