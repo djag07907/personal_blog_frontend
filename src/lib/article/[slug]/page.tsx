@@ -76,14 +76,6 @@ const SinglePage = ({ params }: SinglePageProps) => {
     return id;
   };
 
-  const hashCode = (str: string): string => {
-    const hash = str
-      .split("")
-      .reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, 0)
-      .toString(36);
-    return hash;
-  };
-
   const textToSlug = (text: string): string => {
     return text
       .toLowerCase()
