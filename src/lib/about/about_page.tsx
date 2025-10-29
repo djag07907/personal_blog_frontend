@@ -4,18 +4,19 @@ import { AboutPageData } from "@/lib/about/model/about_data";
 import { getAboutData } from "@/lib/about/service/about_service";
 import {
   shouldShowSection,
-  getFallbackAchievements,
+  // getFallbackAchievements,
 } from "@/lib/about/utils/fallback_data";
-import { formatDate } from "@/lib/commons/utils/date_format";
-import Image from "next/image";
+// import { formatDate } from "@/lib/commons/utils/date_format";
 import { useEffect, useState, useRef } from "react";
+import Lottie from "lottie-react";
+import coderAnimation from "@/assets/animations/coder2.json";
 
 const AboutPage = () => {
   const [aboutData, setAboutData] = useState<AboutPageData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [showFallbackAchievements, setShowFallbackAchievements] =
-    useState(false);
+  // const [showFallbackAchievements, setShowFallbackAchievements] =
+  //   useState(false);
   const hasFetchedRef = useRef(false);
 
   useEffect(() => {
@@ -79,6 +80,16 @@ const AboutPage = () => {
   return (
     <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 pt-20">
       {/* Header */}
+      {/* Lottie Animation */}
+      <div className="text-center mb-16">
+        <div className="inline-block w-64 h-64 md:w-80 md:h-80">
+          <Lottie
+            animationData={coderAnimation}
+            loop={true}
+            className="w-full h-full"
+          />
+        </div>
+      </div>
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           {aboutData.title}
@@ -87,20 +98,6 @@ const AboutPage = () => {
           {aboutData.description}
         </p>
       </div>
-
-      {/* Profile Image */}
-      {aboutData.image?.url && (
-        <div className="text-center mb-16">
-          <div className="inline-block relative w-48 h-48 rounded-full overflow-hidden">
-            <Image
-              src={aboutData.image.url}
-              alt="Profile"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-      )}
 
       {/* About Content */}
       <div className="mb-16">
@@ -130,7 +127,7 @@ const AboutPage = () => {
       )}
 
       {/* Experience Section */}
-      {shouldShowSection.experience(aboutData) && (
+      {/* {shouldShowSection.experience(aboutData) && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Experience</h2>
           <div className="max-w-4xl mx-auto space-y-8">
@@ -159,10 +156,10 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Education Section */}
-      {shouldShowSection.education(aboutData) && (
+      {/* {shouldShowSection.education(aboutData) && (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Education</h2>
           <div className="max-w-4xl mx-auto space-y-6">
@@ -193,9 +190,9 @@ const AboutPage = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
-      {shouldShowSection.achievements(aboutData) ? (
+      {/* {shouldShowSection.achievements(aboutData) ? (
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-center mb-8">Achievements</h2>
           <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
@@ -266,7 +263,7 @@ const AboutPage = () => {
             </div>
           )}
         </div>
-      )}
+      )} */}
     </main>
   );
 };
