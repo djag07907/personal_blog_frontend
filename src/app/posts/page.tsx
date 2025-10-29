@@ -285,14 +285,14 @@ function PostsPageContent() {
       )}
 
       {/* Debug Toggle (remove in production) */}
-      <div className="mt-16 pt-8 border-t border-gray-300 dark:border-gray-600">
+      {/* <div className="mt-16 pt-8 border-t border-gray-300 dark:border-gray-600">
         <button
           onClick={() => setUseMockData((prev) => !prev)}
           className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-lg transition-colors opacity-50"
         >
           {useMockData ? "Use Real Data" : "Use Mock Data"}
         </button>
-      </div>
+      </div> */}
     </main>
   );
 }

@@ -269,14 +269,14 @@ const MostPopularPosts = ({
       )}
 
       {/* Debug toggle for development */}
-      {process.env.NODE_ENV === "development" && (
+      {/* {process.env.NODE_ENV === "development" && (
         <button
           onClick={() => setUseMockData((prev) => !prev)}
           className="mt-4 px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300 self-start"
         >
           {useMockData ? "Use Real Data" : "Use Mock Data"}
         </button>
-      )}
+      )} */}
     </div>
   );
 };

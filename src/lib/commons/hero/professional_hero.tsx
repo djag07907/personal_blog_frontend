@@ -42,18 +42,27 @@ const ProfessionalHero = () => {
 
           <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
             {[
-              "Flutter",
-              "React",
-              "React Native",
-              "TypeScript",
+              "HTML+CSS+JS",
               "Next.js",
+              "React.js",
+              "TypeScript",
               "Angular",
-              "Strapi",
+              "Flutter",
+              "React Native",
+              "Kotlin",
               "Node.js",
-              "PostgreSQL",
+              "Strapi",
+              "Nest.js",
               "Git",
-              "Agile/Scrum",
+              "PostgreSQL",
+              "Firebase",
+              "Figma",
+              "UX/UI Design",
+              "Product Design",
               "Project Management",
+              "Agile/Scrum",
+              "Tech Writing",
+              "System Design",
             ].map((skill) => (
               <span
                 key={skill}
