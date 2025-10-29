@@ -20,7 +20,6 @@ function PostsPageContent() {
 
   const [articles, setArticles] = useState<Article[]>(emptyArray);
   const [error, setError] = useState<string | null>(null);
-  const [useMockData, setUseMockData] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -245,7 +244,7 @@ function PostsPageContent() {
         <div className="text-center py-12">
           <p className="text-red-500 mb-4">{error}</p>
           <button
-            onClick={() => setUseMockData(false)}
+            onClick={() => window.location.reload()}
             className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
           >
             Retry
