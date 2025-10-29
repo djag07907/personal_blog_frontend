@@ -10,6 +10,7 @@ import { formatDate } from "@/lib/commons/utils/date_format";
 import { emptyArray } from "@/lib/constants/constants";
 import { Category } from "@/lib/categories/model/categories_data";
 import { getCategories } from "@/lib/categories/service/category_service";
+import Loader from "@/lib/commons/loader/loader";
 
 // Fallback colors for mock articles only - real articles use categoryColor
 const categoryColors: Record<string, string> = {
@@ -107,13 +108,8 @@ const EditorPickPosts = ({
   }, [useMockData]);
   if (loading) {
     return (
-      <div className="mt-6 lg:mt-9 mb-12 lg:mb-15 flex flex-col gap-4 lg:gap-9">
-        <div className="text-center py-4">
-          <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-2 text-sm text-gray-600">
-            Loading editor's picks...
-          </p>
-        </div>
+      <div className="mt-6 lg:mt-9 mb-12 lg:mb-15">
+        <Loader message="Loading editor's picks" />
       </div>
     );
   }

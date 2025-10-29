@@ -5,6 +5,7 @@ import { mockArticles } from "@/lib/article/model/mock_articles";
 import { getArticleBySlug } from "@/lib/article/service/article_service";
 import Menu from "@/lib/commons/menu/menu";
 import { formatDate } from "@/lib/commons/utils/date_format";
+import Loader from "@/lib/commons/loader/loader";
 import Image from "next/image";
 import { useEffect, useState, useRef, useContext } from "react";
 import ReactMarkdown from "react-markdown";
@@ -199,10 +200,7 @@ const SinglePage = ({ params }: SinglePageProps) => {
   if (loading) {
     return (
       <div className="container mx-auto p-4 pt-28">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-          <span className="ml-3 text-muted">Loading article...</span>
-        </div>
+        <Loader message="Loading article" />
       </div>
     );
   }

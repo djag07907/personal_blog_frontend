@@ -10,6 +10,7 @@ import {
 import { useEffect, useState, useRef } from "react";
 import Lottie from "lottie-react";
 import coderAnimation from "@/assets/animations/coder2.json";
+import Loader from "@/lib/commons/loader/loader";
 
 const AboutPage = () => {
   const [aboutData, setAboutData] = useState<AboutPageData | null>(null);
@@ -47,12 +48,7 @@ const AboutPage = () => {
   if (loading) {
     return (
       <div className="container mx-auto p-4 pt-28">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-          <span className="ml-3 text-gray-600">
-            Loading about information...
-          </span>
-        </div>
+        <Loader message="Loading about information" />
       </div>
     );
   }
@@ -81,7 +77,7 @@ const AboutPage = () => {
     <main className="max-w-screen-2xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 pt-20">
       {/* Header */}
       {/* Lottie Animation */}
-      <div className="text-center mb-16">
+      <div className="text-center mb-5">
         <div className="inline-block w-64 h-64 md:w-80 md:h-80">
           <Lottie
             animationData={coderAnimation}

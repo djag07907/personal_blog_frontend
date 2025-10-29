@@ -4,6 +4,7 @@ import { ContactPageData } from "@/lib/contact/model/contact_data";
 import { getContactData } from "@/lib/contact/service/contact_service";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
+import Loader from "@/lib/commons/loader/loader";
 
 const ContactPage = () => {
   const [contactData, setContactData] = useState<ContactPageData | null>(null);
@@ -100,12 +101,7 @@ const ContactPage = () => {
   if (loading) {
     return (
       <div className="container mx-auto p-4 pt-28">
-        <div className="flex items-center justify-center min-h-[400px]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
-          <span className="ml-3 text-gray-600">
-            Loading contact information...
-          </span>
-        </div>
+        <Loader message="Loading contact information" />
       </div>
     );
   }
