@@ -3,7 +3,7 @@
 import React from "react";
 // import Image from "next/image";
 import Link from "next/link";
-import ThemeToggle from "@/lib/commons/theme/theme_toggle";
+// import ThemeToggle from "@/lib/commons/theme/theme_toggle"; // Commented out - always dark theme
 
 const Navbar: React.FC = () => {
   return (
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           max-[640px]:justify-end
         "
         >
-          <ThemeToggle />
+          {/* <ThemeToggle /> */} {/* Commented out - always dark theme */}
           <Link
             href="/"
             className="max-[640px]:hidden px-4 hover:opacity-80 transition-opacity"

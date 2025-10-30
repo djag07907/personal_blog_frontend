@@ -9,6 +9,6 @@ interface ThemeProviderProps {
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const { theme, mounted } = useContext(ThemeContext);
 
-  return <div className={!mounted ? "light" : theme}>{children}</div>;
+  return <div className={!mounted ? "dark" : theme}>{children}</div>;
 };
 export default ThemeProvider;
