@@ -151,12 +151,6 @@ const Footer = () => {
               >
                 Terms
               </Link>
-              <Link
-                href="/sitemap.xml"
-                className="opacity-75 hover:opacity-100 transition-all"
-              >
-                Sitemap
-              </Link>
             </div>
           </div>
         </div>
